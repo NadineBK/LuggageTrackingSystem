@@ -1,0 +1,65 @@
+external interface Serializable {}
+
+class LTS {
+  depend java.io.Serializable;
+  isA Serializable;
+  private static final long serialVersionUID = -8711676598574856292L;
+}
+
+class Election
+{
+  depend java.io.Serializable;
+  isA Serializable;
+  private static final long serialVersionUID = -4013199163432934189L;
+  
+  public static void reinitializeUniqueID(List<Election> elections) {
+    nextId = 0;
+    for (Election election : elections) {
+      if (election.getId() > nextId) {
+        nextId = election.getId();
+      }
+    }
+    nextId++;
+  }
+}
+
+class SpecificElection
+{
+  depend java.io.Serializable;
+  isA Serializable;
+  private static final long serialVersionUID = -6547472631538993171L;
+  
+  public static void reinitializeUniqueID(List<SpecificElection> specificElections) {
+    nextId = 0;
+    for (SpecificElection specificElection : specificElections) {
+      if (specificElection.getId() > nextId) {
+        nextId = specificElection.getId();
+      }
+    }
+    nextId++;
+  }
+}
+
+class ElectedBody
+{
+  depend java.io.Serializable;
+  isA Serializable;
+  private static final long serialVersionUID = -3047768877196104926L;
+  
+  public static void reinitializeUniqueID(List<ElectedBody> electedBodies) {
+    nextId = 0;
+    for (ElectedBody electedBody : electedBodies) {
+      if (electedBody.getId() > nextId) {
+        nextId = electedBody.getId();
+      }
+    }
+    nextId++;
+  }
+}
+
+class Seat
+{
+  depend java.io.Serializable;
+  isA Serializable;
+  private static final long serialVersionUID = 1587109790154707555L;
+}
