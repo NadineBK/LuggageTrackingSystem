@@ -1,9 +1,8 @@
 namespace ca.mcgill.ecse681.lts.model;
 
-use LTSPersistence.ump;
-
 class LTS
 {
+	singleton;
 	1 <@>- * Passenger passengers;
 	1 <@>- * Flight flights;
 	1 <@>- * Transaction transactions;

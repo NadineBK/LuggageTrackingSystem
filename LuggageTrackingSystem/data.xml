@@ -1,0 +1,20 @@
+<ca.mcgill.ecse681.lts.model.Passenger id="1">
+  <passportID>ABC123</passportID>
+  <lastName>John</lastName>
+  <firstName>Patrick</firstName>
+  <expiredPassport>false</expiredPassport>
+  <luggageWeightLimit>23.0</luggageWeightLimit>
+  <loungeAccess>false</loungeAccess>
+  <overweightLuggagePrivilege>false</overweightLuggagePrivilege>
+  <flights id="2"/>
+  <transactions id="3"/>
+  <lTS id="4">
+    <passengers id="5">
+      <ca.mcgill.ecse681.lts.model.Passenger reference="1"/>
+    </passengers>
+    <flights id="6"/>
+    <transactions id="7"/>
+    <creditCards id="8"/>
+  </lTS>
+  <luggages id="9"/>
+</ca.mcgill.ecse681.lts.model.Passenger>

@@ -3,22 +3,15 @@ package ca.mcgill.ecse681.lts.view;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Image;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
-import javax.swing.border.TitledBorder;
-
 import java.awt.event.ActionListener;
-import java.util.concurrent.TimeUnit;
 import java.awt.event.ActionEvent;
 
 public class LTSWindow extends JPanel {
@@ -28,11 +21,6 @@ public class LTSWindow extends JPanel {
 	 */
 	private static final long serialVersionUID = 7983207646348376216L;
 	private JLabel lblNewLabel_1;
-	private int x = 100;
-    private Timer timer;
-    //private JFrame parent;
-
-	
 
 	/**
 	 * Create the panel.
@@ -93,7 +81,7 @@ public class LTSWindow extends JPanel {
 		JLabel lblNewLabel = new JLabel("Luggage Tracking System");
 		lblNewLabel.setFont(new Font("Stencil", Font.BOLD, 40));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(50, 31, 616, 44);
+		lblNewLabel.setBounds(50, 31, 616, 57);
 		add(lblNewLabel);
 
 	}
@@ -107,11 +95,6 @@ public class LTSWindow extends JPanel {
 		ImageIcon image = new ImageIcon(newImg);
 		image.paintIcon(this, g, 50, 50);
 
-	}
-	
-	public void move() {
-		x += 50;
-		repaint();
 	}*/
 
 }

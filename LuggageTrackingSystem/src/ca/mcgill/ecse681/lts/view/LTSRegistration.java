@@ -1,25 +1,22 @@
 package ca.mcgill.ecse681.lts.view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class LTSRegistration extends JPanel {
 
-	private JPanel contentPane;
-	private LTSWindow ltsw;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3330138391813747399L;
 	private JTextField txtRegistration;
 	private JTextField passportID;
 	private JLabel lblPassportID;
@@ -150,7 +147,7 @@ public class LTSRegistration extends JPanel {
 		
 		JLabel lblTravelDetails = new JLabel("Travel Details");
 		lblTravelDetails.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTravelDetails.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
+		lblTravelDetails.setFont(new Font("Trebuchet MS", Font.BOLD, 16));
 		lblTravelDetails.setBounds(259, 245, 161, 14);
 		add(lblTravelDetails);
 		

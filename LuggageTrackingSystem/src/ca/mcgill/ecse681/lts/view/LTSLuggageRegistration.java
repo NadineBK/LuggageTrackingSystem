@@ -1,9 +1,7 @@
 package ca.mcgill.ecse681.lts.view;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,8 +19,13 @@ import java.awt.event.ActionEvent;
 
 public class LTSLuggageRegistration extends JPanel {
 
-	private JPanel contentPane;
-	private LTSWindow ltsw;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2541143312780718091L;
+	/**
+	 * 
+	 */
 	private JTextField txtRegistration;
 	private JLabel lblWeight;
 	private JTextField weight;

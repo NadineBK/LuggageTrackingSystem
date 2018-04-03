@@ -2,9 +2,7 @@ package ca.mcgill.ecse681.lts.view;
 
 import java.awt.Color;
 import java.awt.Font;
-
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,9 +12,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class LTSTransaction extends JPanel {
-	
-	private JPanel contentPane;
-	private LTSWindow ltsw;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7515045867092081866L;
 	private JTextField txtTransaction;
 	private JLabel lblAmount;
 	private JTextField amount;
