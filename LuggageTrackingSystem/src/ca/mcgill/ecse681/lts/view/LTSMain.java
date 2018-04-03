@@ -16,7 +16,7 @@ public class LTSMain extends JFrame {
 	 */
 	private static final long serialVersionUID = -4418254246815485951L;
 	private JPanel contentPane;
-	private LTSWindow reg;
+	private LTSWindow w;
 
 
 	/**
@@ -33,12 +33,12 @@ public class LTSMain extends JFrame {
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		reg = new LTSWindow();
-		reg.setSize(355, 158);
-		reg.setLocation(55, 25);
-		reg.setBounds(0, 0, 699, 504);
+		w = new LTSWindow(this);
+		w.setSize(355, 158);
+		w.setLocation(55, 25);
+		w.setBounds(0, 0, 715, 543);
 		//reg.setPreferredSize(new Dimension(450, 300));
-		contentPane.add(reg);
+		contentPane.add(w);
 	}
 
 }

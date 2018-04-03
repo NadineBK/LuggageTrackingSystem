@@ -27,54 +27,42 @@ public class LTSWindow extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 7983207646348376216L;
-	private JTextField txtLuggageTrackingSystem;
 	private JLabel lblNewLabel_1;
 	private int x = 100;
     private Timer timer;
+    //private JFrame parent;
 
 	
 
 	/**
 	 * Create the panel.
 	 */
-	public LTSWindow() {
-		//JFrame e = (JFrame) this.getParent();
+	public LTSWindow(final JFrame parent) {
+		//parent = (JFrame) this.getParent();
 		//setBorder(new TitledBorder(null, "Registration", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setBackground(new Color(135, 206, 235));
 		setLayout(null);
 		
-		txtLuggageTrackingSystem = new JTextField();
-		txtLuggageTrackingSystem.setEditable(false);
-		txtLuggageTrackingSystem.setBackground(new Color(135, 206, 235));
-		txtLuggageTrackingSystem.setBorder(javax.swing.BorderFactory.createEmptyBorder());
-		txtLuggageTrackingSystem.setBounds(46, 35, 599, 44);
-		txtLuggageTrackingSystem.setHorizontalAlignment(SwingConstants.CENTER);
-		txtLuggageTrackingSystem.setFont(new Font("Stencil", Font.PLAIN, 44));
-		txtLuggageTrackingSystem.setText("Luggage Tracking System");
-		add(txtLuggageTrackingSystem);
-		txtLuggageTrackingSystem.setColumns(10);
+		Canvas canvas = new Canvas();
+		canvas.setForeground(Color.BLACK);
+		canvas.setBackground(Color.GRAY);
+		canvas.setBounds(316, 380, 310, 19);
+		add(canvas);
 		lblNewLabel_1 = new JLabel("New label");
 		lblNewLabel_1.setBackground(Color.WHITE);
-		lblNewLabel_1.setBounds(104, 130, 139, 262);
+		lblNewLabel_1.setBounds(84, 130, 139, 262);
 		ImageIcon MyImage = new ImageIcon(this.getClass().getResource("/images/icon.png"));
 		Image img = MyImage.getImage();
 		Image newImg = img.getScaledInstance(lblNewLabel_1.getWidth(), lblNewLabel_1.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon image = new ImageIcon(newImg);
 		lblNewLabel_1.setIcon(image);
 		add(lblNewLabel_1);
-				
-		Canvas canvas = new Canvas();
-		canvas.setForeground(Color.BLACK);
-		canvas.setBackground(Color.WHITE);
-		canvas.setBounds(307, 97, 327, 324);
-		add(canvas);
 		
 		JButton btnStartRegistration = new JButton("Start Registration");
 		btnStartRegistration.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
-				lblNewLabel_1.setOpaque(true);
-				lblNewLabel_1.move(400,125);
+				//lblNewLabel_1.setOpaque(true);
+				lblNewLabel_1.setLocation(400,125);
 
 				SwingUtilities.invokeLater(new Runnable()
 	            {
@@ -82,24 +70,32 @@ public class LTSWindow extends JPanel {
 	                {
 	                    try
 	                    {
-	                        Thread.sleep(750);
+	                        Thread.sleep(1200);
 	                    }
 	                    catch(Exception ie)
 	                    {}	 
 	                    
 	                    setVisible(false);
-	    				LTSRegistration ltsr = new LTSRegistration(LTSWindow.this);
-	    				ltsr.setVisible(true);
-	    				repaint();
+	    				LTSRegistration ltsr = new LTSRegistration(parent);
+	    				parent.setContentPane(ltsr);
+	    				//ltsr.setVisible(true);
+	    				//repaint();
 	                }
 	            });			
 			}
 		});
 		
-		btnStartRegistration.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnStartRegistration.setBounds(244, 445, 157, 36);
+		btnStartRegistration.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
+		btnStartRegistration.setBounds(275, 445, 157, 36);
 		add(btnStartRegistration);
 		setBounds(100, 100, 676, 504);
+		
+		JLabel lblNewLabel = new JLabel("Luggage Tracking System");
+		lblNewLabel.setFont(new Font("Stencil", Font.BOLD, 40));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(50, 31, 616, 44);
+		add(lblNewLabel);
+
 	}
 	
 	/*@Override

@@ -1,65 +1,89 @@
 external interface Serializable {}
 
 class LTS {
-  depend java.io.Serializable;
-  isA Serializable;
-  private static final long serialVersionUID = -8711676598574856292L;
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 3L;
 }
 
-class Election
+class CreditCard
 {
-  depend java.io.Serializable;
-  isA Serializable;
-  private static final long serialVersionUID = -4013199163432934189L;
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 1L;
+}
+
+class Flight
+{
+	depend java.io.Serializable;
+	isA Serializable;
+  	private static final long serialVersionUID = 2L;
   
-  public static void reinitializeUniqueID(List<Election> elections) {
-    nextId = 0;
-    for (Election election : elections) {
-      if (election.getId() > nextId) {
-        nextId = election.getId();
-      }
-    }
-    nextId++;
-  }
+  	public static void reinitializeUniqueID(List<Flight> flights) {
+	    nextId = 0;
+	    for (Flight flight : flights) {
+	      if (flight.getId() > nextId) {
+	        nextId = flight.getId();
+	      }
+	    }
+	    nextId++;
+	  }
 }
 
-class SpecificElection
+class Luggage
 {
-  depend java.io.Serializable;
-  isA Serializable;
-  private static final long serialVersionUID = -6547472631538993171L;
+ 	depend java.io.Serializable;
+  	isA Serializable;
+  	private static final long serialVersionUID = 4L;
+}
+
+class Passenger
+{
+ 	depend java.io.Serializable;
+  	isA Serializable;
+  	private static final long serialVersionUID = 5L;
   
-  public static void reinitializeUniqueID(List<SpecificElection> specificElections) {
-    nextId = 0;
-    for (SpecificElection specificElection : specificElections) {
-      if (specificElection.getId() > nextId) {
-        nextId = specificElection.getId();
-      }
-    }
-    nextId++;
-  }
+  	public static void reinitializeUniqueID(List<Passenger> passengers) {
+    	nextId = 0;
+    	for (Passenger passenger : passengers) {
+	      if (passenger.getId() > nextId) {
+	        nextId = passenger.getId();
+	      }
+	    }
+	    nextId++;
+	  }
 }
 
-class ElectedBody
+class Tag
 {
-  depend java.io.Serializable;
-  isA Serializable;
-  private static final long serialVersionUID = -3047768877196104926L;
+  	depend java.io.Serializable;
+  	isA Serializable;
+  	private static final long serialVersionUID = 6L;
   
-  public static void reinitializeUniqueID(List<ElectedBody> electedBodies) {
-    nextId = 0;
-    for (ElectedBody electedBody : electedBodies) {
-      if (electedBody.getId() > nextId) {
-        nextId = electedBody.getId();
-      }
-    }
-    nextId++;
-  }
+  	public static void reinitializeUniqueID(List<Tag> tags) {
+	    nextId = 0;
+	    for (Tag tag : tags) {
+	      if (tags.getId() > nextId) {
+	        nextId = tags.getId();
+	      }
+	    }
+	    nextId++;
+	  }
 }
 
-class Seat
+class Transaction
 {
-  depend java.io.Serializable;
-  isA Serializable;
-  private static final long serialVersionUID = 1587109790154707555L;
+  	depend java.io.Serializable;
+  	isA Serializable;
+  	private static final long serialVersionUID = 7L;
+  
+  	public static void reinitializeUniqueID(List<Transaction> transactions) {
+	    nextId = 0;
+	    for (Transaction transaction : transactions) {
+	      if (transaction.getId() > nextId) {
+	        nextId = transaction.getId();
+	      }
+	    }
+	    nextId++;
+	  }
 }

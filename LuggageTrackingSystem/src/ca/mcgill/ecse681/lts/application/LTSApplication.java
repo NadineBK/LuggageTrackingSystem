@@ -1,7 +1,11 @@
-package ca.mcgill.ecse681.lts.view;
+package ca.mcgill.ecse681.lts.application;
 
 import java.awt.EventQueue;
 
+//import ca.mcgill.ecse681.lts.model.Flight;
+//import ca.mcgill.ecse681.lts.model.LTS;
+//import ca.mcgill.ecse681.lts.model.Passenger;
+import ca.mcgill.ecse681.lts.persistence.PersistenceObjectStream;
 import ca.mcgill.ecse681.lts.view.LTSMain;
 
 import javax.swing.JFrame;
@@ -9,7 +13,7 @@ import javax.swing.JFrame;
 public class LTSApplication {
 
 	//private static LTS lts;
-	//private final static String FILE_NAME = "data.ems";
+	private final static String FILE_NAME = "data.ems";
 
 	/**
 	 * Launch the application.
@@ -18,8 +22,8 @@ public class LTSApplication {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					//LTSApplication window = new LTSApplication();
-					//window.frame.setVisible(true);
+					//LTSApplication app = new LTSApplication();
+					//app.frame.setVisible(true);
 					new LTSMain().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,11 +49,11 @@ public class LTSApplication {
 		if (lts == null) {
 			lts = new LTS();
 		} else {
-			//Election.reinitializeUniqueID(ems.getElections());
-			//SpecificElection.reinitializeUniqueID(ems.getSpecificElections());
+			//Flight.reinitializeUniqueID(lts.getFlights());
+			Passenger.reinitializeUniqueID(lts.getPassengers());
 			//ElectedBody.reinitializeUniqueID(ems.getElectedBodies());
 		}
 		return lts;
-	}*/
-
+	}
+	*/
 }

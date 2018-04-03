@@ -1,38 +1,23 @@
 namespace ca.mcgill.ecse681.lts.model;
 
+use LTSPersistence.ump;
+
 class LTS
 {
-	1 -- * Passenger;
+	1 <@>- * Passenger passengers;
+	1 <@>- * Flight flights;
+	1 <@>- * Transaction transactions;
+	1 <@>- * CreditCard creditCards;
 }
 
 class Luggage
 {
 	float weight;
 	[weight > 0]
-	float width;
-	[width > 0]
-	float height;
-	[height > 0]
-	float length;
-	[length > 0]
 	Boolean priority;
 	Boolean fragile;
-	Boolean checkedIn;
-	location;
-	
-	before constructor {
-	    if (aLocation == null || aLocation.length() == 0) {
-	    	throw new RuntimeException("The location cannot be empty.");
-	    }
-	}
-	before setLocation{
-		if (aLocation == null || aLocation.length() == 0) {
-			return false;
-		}
-  	}	
-	
 	0..2 -<@> 1 Passenger;		
-	1 -- 1 Tag;
+	1 <@>- 1 Tag;
  }
 
 class Passenger
