@@ -1,15 +1,19 @@
 package ca.mcgill.ecse681.lts.view;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
+import ca.mcgill.ecse681.lts.controller.Controller;
 
 public class LTSRegistration extends JPanel {
 
@@ -70,6 +74,20 @@ public class LTSRegistration extends JPanel {
 		passportID.setColumns(10);
 		
 		JButton btnScan = new JButton("SCAN");
+		btnScan.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int i = Controller.populatePassengerDetails(passportID.getText());
+				if(i == 1) {
+					firstName.setText(Controller.getPassengerFirstName(passportID.getText()));
+					//lastName.setText(Controller.getPassengerLastName(passportID.getText()));
+					//keep doing this to populate all the fields using the separate methods
+				}
+				else if (i == 0)
+				{
+					JOptionPane.showMessageDialog(null, "Invalid Passport ID", "LuggageTrackingSystem", 1);
+				}
+			}
+		});
 		btnScan.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
 		btnScan.setBounds(478, 77, 89, 23);
 		add(btnScan);

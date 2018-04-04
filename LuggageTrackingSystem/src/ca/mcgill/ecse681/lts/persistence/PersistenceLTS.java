@@ -7,7 +7,7 @@ import ca.mcgill.ecse681.lts.model.*;
 public class PersistenceLTS {
 
 	private static void initializeXStream() {
-		PersistenceXStream.setFilename("LTSData.xml");
+		PersistenceXStream.setFilename("data.xml");
 		PersistenceXStream.setAlias("lts", LTS.class);
 		PersistenceXStream.setAlias("creditCard", CreditCard.class);
 		PersistenceXStream.setAlias("flight", Flight.class);

@@ -1,5 +1,6 @@
 package ca.mcgill.ecse681.lts.application;
 
+import ca.mcgill.ecse681.lts.database.Population;
 import ca.mcgill.ecse681.lts.persistence.PersistenceLTS;
 import ca.mcgill.ecse681.lts.view.LTSMain;
 
@@ -15,6 +16,7 @@ public class LTSApplication {
 		// start UI
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+            	Population.main();
                 new LTSMain().setVisible(true);
             }
         });
