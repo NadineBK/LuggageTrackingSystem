@@ -34,10 +34,11 @@ public class LTSTransaction extends JPanel {
 	private JTextField nameOnCard;
 	private JLabel lblSecurityCode;
 	private JTextField securityCode;
+	private JLabel lblOutput;
 	/**
 	 * Create the panel.
 	 */
-	public LTSTransaction(final JFrame parent, final JPanel lr) {
+	public LTSTransaction(final JFrame parent, final JPanel lr, float overweight) {
 		setBounds(100, 100, 676, 504);
 		setBackground(new Color(135, 206, 235));
 		setLayout(null);
@@ -60,10 +61,18 @@ public class LTSTransaction extends JPanel {
 		
 		amount = new JTextField();
 		amount.setBounds(361, 103, 126, 20);
+		amount.setEditable(false);
+		amount.setText(String.valueOf(overweight*10));
 		add(amount);
 		amount.setColumns(10);
 		
 		btnFinish = new JButton("PAY");
+		btnFinish.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				lblOutput.setText("Transaction Successful!");
+				lblOutput.setEnabled(true);
+			}
+		});
 		btnFinish.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
 		btnFinish.setBounds(290, 314, 89, 23);
 		add(btnFinish);
@@ -157,7 +166,7 @@ public class LTSTransaction extends JPanel {
 		btnPrintReceipt.setBounds(268, 380, 139, 23);
 		add(btnPrintReceipt);
 		
-		JLabel lblOutput = new JLabel("");
+		lblOutput = new JLabel("");
 		lblOutput.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
 		lblOutput.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOutput.setEnabled(false);

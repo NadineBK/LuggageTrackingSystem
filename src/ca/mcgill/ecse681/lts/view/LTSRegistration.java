@@ -101,7 +101,7 @@ public class LTSRegistration extends JPanel {
 					firstName.setText(Controller.getPassengerFirstName(passportIDString));
 					lastName.setText(Controller.getPassengerLastName(passportIDString));
 					weightLimit.setText(Controller.getPassengerWeightLimit(passportIDString));
-					overweightPrivilege.setText(Controller.getPassengerOverweightPrivelage(passportIDString));
+					overweightPrivilege.setText(Controller.getPassengerOverweightPrivilege(passportIDString));
 					loungeAccess.setText(Controller.getPassengerLoungeAccess(passportIDString));
 					validPassport.setText(Controller.getPassengerValidPassport(passportIDString));
 					
@@ -141,7 +141,7 @@ public class LTSRegistration extends JPanel {
 		
 		firstName = new JTextField();
 		firstName.setEditable(false);
-		firstName.setBounds(183, 120, 126, 20);
+		firstName.setBounds(193, 120, 126, 20);
 		add(firstName);
 		firstName.setColumns(10);
 		
@@ -152,18 +152,18 @@ public class LTSRegistration extends JPanel {
 		
 		lastName = new JTextField();
 		lastName.setEditable(false);
-		lastName.setBounds(183, 151, 126, 20);
+		lastName.setBounds(193, 151, 126, 20);
 		add(lastName);
 		lastName.setColumns(10);
 		
-		lblValidPassport = new JLabel("Is Passport Valid?");
+		lblValidPassport = new JLabel("Is Passport Expired?");
 		lblValidPassport.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
-		lblValidPassport.setBounds(55, 181, 118, 20);
+		lblValidPassport.setBounds(55, 181, 135, 20);
 		add(lblValidPassport);
 		
 		validPassport = new JTextField();
 		validPassport.setEditable(false);
-		validPassport.setBounds(183, 182, 126, 20);
+		validPassport.setBounds(193, 182, 126, 20);
 		add(validPassport);
 		validPassport.setColumns(10);
 		

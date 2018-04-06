@@ -2,8 +2,11 @@ package ca.mcgill.ecse681.lts.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 
 import javax.swing.AbstractButton;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -45,6 +49,9 @@ public class LTSLuggageRegistration extends JPanel {
 	private JButton btnRegisterLuggage;
 	private JButton btnCheckIn;
 	private JTable table;
+	private JLabel lblFragile;
+	private JLabel lblPriority;
+	private float overweight;
 
 
 	/**
@@ -72,17 +79,18 @@ public class LTSLuggageRegistration extends JPanel {
 		add(lblWeight);
 		
 		weight = new JTextField();
-		weight.setBounds(216, 103, 126, 20);
+		weight.setBounds(216, 103, 128, 20);
 		add(weight);
 		weight.setColumns(10);
-		
+				
 		btnCheckIn = new JButton("Check In ->");
 		btnCheckIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!weight.getText().isEmpty()){
-					if(Integer.valueOf(weight.getText())>23){
+					if(Float.valueOf(weight.getText()) > Float.valueOf(Controller.getPassengerWeightLimit(passportID))){
 						btnRegisterLuggage.setEnabled(false);
 						btnPayForOverweight.setEnabled(true);
+						overweight = (int) Math.ceil(Float.valueOf(weight.getText()) - Float.valueOf(Controller.getPassengerWeightLimit(passportID)));
 					}else{
 						btnRegisterLuggage.setEnabled(true);
 						btnPayForOverweight.setEnabled(false);
@@ -96,9 +104,34 @@ public class LTSLuggageRegistration extends JPanel {
 		});
 		
 		btnCheckIn.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
-		btnCheckIn.setBounds(216, 120, 126, 20);//setBounds(97, 102, 118, 20);
+		btnCheckIn.setBounds(217, 122, 126, 20);//setBounds(97, 102, 118, 20);
 		add(btnCheckIn);
 		
+		Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
+		
+		lblFragile = new JLabel("New label");
+		lblFragile.setBackground(Color.WHITE);
+		lblFragile.setBounds(520, 272, 118, 131);
+		lblFragile.setBorder(border);
+		ImageIcon MyImage = new ImageIcon(this.getClass().getResource("/images/fragile.jpg"));
+		Image img = MyImage.getImage();
+		Image newImg = img.getScaledInstance(lblFragile.getWidth(), lblFragile.getHeight(), Image.SCALE_SMOOTH);
+		ImageIcon image = new ImageIcon(newImg);
+		lblFragile.setIcon(image);
+		lblFragile.setVisible(false);
+		add(lblFragile);
+		
+		lblPriority = new JLabel("New label");
+		lblPriority.setBackground(Color.WHITE);
+		lblPriority.setBounds(43, 289, 118, 114);
+		lblPriority.setBorder(border);
+		ImageIcon MyImage2 = new ImageIcon(this.getClass().getResource("/images/priority.jpg"));
+		Image img2 = MyImage2.getImage();
+		Image newImg2 = img2.getScaledInstance(lblPriority.getWidth(), lblPriority.getHeight(), Image.SCALE_SMOOTH);
+		ImageIcon image2 = new ImageIcon(newImg2);
+		lblPriority.setIcon(image2);
+		lblPriority.setVisible(false);
+		add(lblPriority);
 		
 		JLabel lblTag = new JLabel("Tag");
 		lblTag.setHorizontalAlignment(SwingConstants.CENTER);
@@ -148,7 +181,7 @@ public class LTSLuggageRegistration extends JPanel {
 		btnPayForOverweight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
- 				LTSTransaction ltst = new LTSTransaction(parent, LTSLuggageRegistration.this);
+ 				LTSTransaction ltst = new LTSTransaction(parent, LTSLuggageRegistration.this, overweight);
  				parent.setContentPane(ltst);
 			}
 		});
@@ -164,6 +197,23 @@ public class LTSLuggageRegistration extends JPanel {
 		
 		btnRegisterLuggage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(chckbxFragile.isSelected())
+				{
+					lblFragile.setVisible(true);
+				}
+				else if(!chckbxFragile.isSelected())
+				{
+					lblFragile.setVisible(false);
+				}
+				if(chckbxPriority.isSelected())
+				{
+					lblPriority.setVisible(true);
+				}
+				else if(!chckbxPriority.isSelected())
+				{
+					lblPriority.setVisible(false);
+				}
+				
 				Passenger passenger = Controller.getPassenger(passportID);
 				Luggage luggage  = Controller.createLuggage(Float.valueOf(weight.getText()), chckbxPriority.isSelected(), chckbxFragile.isSelected(), passenger);
 				
@@ -175,6 +225,7 @@ public class LTSLuggageRegistration extends JPanel {
 				table.getModel().setValueAt(Controller.getPassengerLastName(passportID), 4, 1);	
 				table.getModel().setValueAt(luggage.getTag().getLuggageID(), 5, 1);	
 				
+				btnRegisterLuggage.setEnabled(false);
 			}
 		});
 		
@@ -185,7 +236,15 @@ public class LTSLuggageRegistration extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				weight.setText("");
 				chckbxFragile.setSelected(false);
-				chckbxPriority.setSelected(false);				
+				chckbxPriority.setSelected(false);	
+				int i;
+				for(i=0; i<6; i++) {
+					table.getModel().setValueAt("",i,1);
+				}
+				lblPriority.setVisible(false);
+				lblFragile.setVisible(false);
+				btnRegisterLuggage.setEnabled(false);
+				btnPayForOverweight.setEnabled(false);
 			}
 		});
 		btnAddAnotherLuggage.setFont(new Font("Trebuchet MS", Font.BOLD, 14));

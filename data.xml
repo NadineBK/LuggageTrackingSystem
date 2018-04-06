@@ -26,9 +26,9 @@
       <lTS reference="1"/>
       <luggages id="10">
         <luggage id="11">
-          <weight>13.0</weight>
+          <weight>35.2</weight>
           <priority>true</priority>
-          <fragile>true</fragile>
+          <fragile>false</fragile>
           <passenger reference="3"/>
           <tag id="12">
             <luggageID>1</luggageID>

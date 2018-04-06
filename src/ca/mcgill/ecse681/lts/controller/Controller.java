@@ -76,11 +76,14 @@ public class Controller {
 		return "";
 	}
 	
-	public static String getPassengerOverweightPrivelage(String passportID) {
+	public static String getPassengerOverweightPrivilege(String passportID) {
 		LTS lts = LTS.getInstance();
 		for (Passenger passenger : lts.getPassengers()) {
 			if(passenger.getPassportID().equals(passportID)) {
-				return String.valueOf(passenger.getOverweightLuggagePrivilege());
+				if(passenger.getOverweightLuggagePrivilege()==true) {
+					return "Yes";
+				}
+				return "No"; 
 			}
 		}
 		return "";
@@ -90,7 +93,10 @@ public class Controller {
 		LTS lts = LTS.getInstance();
 		for (Passenger passenger : lts.getPassengers()) {
 			if(passenger.getPassportID().equals(passportID)) {
-				return String.valueOf(passenger.getLoungeAccess());
+				if(passenger.getLoungeAccess()==true) {
+					return "Yes";
+				}
+				return "No"; 
 			}
 		}
 		return "";
@@ -100,7 +106,10 @@ public class Controller {
 		LTS lts = LTS.getInstance();
 		for (Passenger passenger : lts.getPassengers()) {
 			if(passenger.getPassportID().equals(passportID)) {
-				return String.valueOf(passenger.getExpiredPassport());
+				if(passenger.getExpiredPassport()==true) {
+					return "Yes";
+				}
+				return "No"; 
 			}
 		}
 		return "";
@@ -115,6 +124,7 @@ public class Controller {
 		}
 		return null;
 	}
+	
 	public static String getFlightSource(String passportID) {
 		Passenger passenger  = getPassenger(passportID);
 				

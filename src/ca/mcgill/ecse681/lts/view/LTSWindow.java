@@ -20,7 +20,7 @@ public class LTSWindow extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 7983207646348376216L;
-	private JLabel lblNewLabel_1;
+	private JLabel lblIcon;
 
 	/**
 	 * Create the panel.
@@ -36,21 +36,21 @@ public class LTSWindow extends JPanel {
 		canvas.setBackground(Color.GRAY);
 		canvas.setBounds(316, 380, 310, 19);
 		add(canvas);
-		lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setBackground(Color.WHITE);
-		lblNewLabel_1.setBounds(84, 130, 139, 262);
+		lblIcon = new JLabel("New label");
+		lblIcon.setBackground(Color.WHITE);
+		lblIcon.setBounds(84, 130, 139, 262);
 		ImageIcon MyImage = new ImageIcon(this.getClass().getResource("/images/icon.png"));
 		Image img = MyImage.getImage();
-		Image newImg = img.getScaledInstance(lblNewLabel_1.getWidth(), lblNewLabel_1.getHeight(), Image.SCALE_SMOOTH);
+		Image newImg = img.getScaledInstance(lblIcon.getWidth(), lblIcon.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon image = new ImageIcon(newImg);
-		lblNewLabel_1.setIcon(image);
-		add(lblNewLabel_1);
+		lblIcon.setIcon(image);
+		add(lblIcon);
 		
 		JButton btnStartRegistration = new JButton("Start Registration");
 		btnStartRegistration.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//lblNewLabel_1.setOpaque(true);
-				lblNewLabel_1.setLocation(400,125);
+				lblIcon.setLocation(400,125);
 
 				SwingUtilities.invokeLater(new Runnable()
 	            {
