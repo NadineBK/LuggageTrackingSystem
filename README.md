@@ -13,10 +13,10 @@ On subsequent runs of the application, ensure that the Population.main() line of
 *OR* <br />
 Delete the data.xml file again while keeping the Population.main() line uncommented to recreate the predefined database. This will however eliminate any changes made to the database when the application was run the first time such as luggage tag creation associated to a passenger. 
 
-### Important considerations:
+### Important considerations
 - We used the Model-View-Controller pattern to implement our application.
 
-### Code structure breakdown: 
+### Code structure breakdown
 - ca.mcgill.ecse681.lts.database package: 
     - Population.java : creates the predefined database of passengers, flights, luggages when the application is ran to be able to test the application features. 
 - ca.mcgill.ecse681.lts.controller package: 
