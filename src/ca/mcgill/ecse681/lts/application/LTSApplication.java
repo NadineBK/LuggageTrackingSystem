@@ -16,7 +16,7 @@ public class LTSApplication {
 		// start UI
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-            	Population.main();
+            	Population.databaseCreation();
                 new LTSMain().setVisible(true);
             }
         });

@@ -11,7 +11,7 @@ import ca.mcgill.ecse681.lts.persistence.PersistenceXStream;
 
 public class Population {
 
-	public static void main() {
+	public static void databaseCreation() {
 		LTS lts = LTS.getInstance();
 		  
 		Passenger p = new Passenger("ABC123", "John", "Patrick", false, 23.0f, false, false, lts);

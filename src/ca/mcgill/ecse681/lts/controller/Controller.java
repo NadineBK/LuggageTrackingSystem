@@ -191,16 +191,27 @@ public class Controller {
 		return "";
 	}
 
-	public static Luggage createLuggage(float aWeight, boolean aPriority, boolean aFragile, Passenger passenger)
- {
+	public static Luggage createLuggage(float aWeight, boolean aPriority, boolean aFragile, String location, Passenger passenger)
+	{
 		LTS lts = LTS.getInstance();
 		
 		
-		Luggage luggage = new Luggage (aWeight, aPriority, aFragile, passenger);
+		Luggage luggage = new Luggage (aWeight, aPriority, aFragile, location, passenger);
 		passenger.addLuggage(luggage);
 		
 		PersistenceXStream.saveToXMLwithXStream(lts);	
 		return luggage;
+	}
+	
+	public static int getLuggageCount(String passportID)
+	{
+		LTS lts = LTS.getInstance();
+		for (Passenger passenger : lts.getPassengers()) {
+			if(passenger.getPassportID().equals(passportID)) {
+				return passenger.getLuggages().size();
+			}
+		}
+		return 0;
 	}
 
 }

@@ -15,6 +15,7 @@ public class Luggage
   private float weight;
   private boolean priority;
   private boolean fragile;
+  private String location;
 
   //Luggage Associations
   private Passenger passenger;
@@ -24,11 +25,17 @@ public class Luggage
   // CONSTRUCTOR
   //------------------------
 
-  public Luggage(float aWeight, boolean aPriority, boolean aFragile, Passenger aPassenger, Tag aTag)
+  public Luggage(float aWeight, boolean aPriority, boolean aFragile, String aLocation, Passenger aPassenger, Tag aTag)
   {
+    // line 20 "../../../../../LTS.ump"
+    if (aLocation == null || aLocation.length() == 0) {
+    	    	throw new RuntimeException("The name of a passenger cannot be empty.");
+    	    }
+    // END OF UMPLE BEFORE INJECTION
     weight = aWeight;
     priority = aPriority;
     fragile = aFragile;
+    location = aLocation;
     boolean didAddPassenger = setPassenger(aPassenger);
     if (!didAddPassenger)
     {
@@ -45,11 +52,17 @@ public class Luggage
     }
   }
 
-  public Luggage(float aWeight, boolean aPriority, boolean aFragile, Passenger aPassenger)
+  public Luggage(float aWeight, boolean aPriority, boolean aFragile, String aLocation, Passenger aPassenger)
   {
+    // line 20 "../../../../../LTS.ump"
+    if (aLocation == null || aLocation.length() == 0) {
+    	    	throw new RuntimeException("The name of a passenger cannot be empty.");
+    	    }
+    // END OF UMPLE BEFORE INJECTION
     weight = aWeight;
     priority = aPriority;
     fragile = aFragile;
+    location = aLocation;
     boolean didAddPassenger = setPassenger(aPassenger);
     if (!didAddPassenger)
     {
@@ -93,6 +106,19 @@ public class Luggage
     return wasSet;
   }
 
+  public boolean setLocation(String aLocation)
+  {
+    boolean wasSet = false;
+    // line 25 "../../../../../LTS.ump"
+    if (aLocation == null || aLocation.length() == 0) {
+    			return false;
+    		}
+    // END OF UMPLE BEFORE INJECTION
+    location = aLocation;
+    wasSet = true;
+    return wasSet;
+  }
+
   public float getWeight()
   {
     return weight;
@@ -106,6 +132,11 @@ public class Luggage
   public boolean getFragile()
   {
     return fragile;
+  }
+
+  public String getLocation()
+  {
+    return location;
   }
 
   public boolean isPriority()
@@ -181,7 +212,8 @@ public class Luggage
     return super.toString() + "["+
             "weight" + ":" + getWeight()+ "," +
             "priority" + ":" + getPriority()+ "," +
-            "fragile" + ":" + getFragile()+ "]" + System.getProperties().getProperty("line.separator") +
+            "fragile" + ":" + getFragile()+ "," +
+            "location" + ":" + getLocation()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "passenger = "+(getPassenger()!=null?Integer.toHexString(System.identityHashCode(getPassenger())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "tag = "+(getTag()!=null?Integer.toHexString(System.identityHashCode(getTag())):"null");
   }

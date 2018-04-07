@@ -4,7 +4,7 @@
 package ca.mcgill.ecse681.lts.model;
 import java.util.*;
 
-// line 159 "../../../../../LTS.ump"
+// line 170 "../../../../../LTS.ump"
 public class Tag
 {
 
@@ -40,10 +40,10 @@ public class Tag
     flights = new ArrayList<Flight>();
   }
 
-  public Tag(float aWeightForLuggage, boolean aPriorityForLuggage, boolean aFragileForLuggage, Passenger aPassengerForLuggage)
+  public Tag(float aWeightForLuggage, boolean aPriorityForLuggage, boolean aFragileForLuggage, String aLocationForLuggage, Passenger aPassengerForLuggage)
   {
     luggageID = nextLuggageID++;
-    luggage = new Luggage(aWeightForLuggage, aPriorityForLuggage, aFragileForLuggage, aPassengerForLuggage, this);
+    luggage = new Luggage(aWeightForLuggage, aPriorityForLuggage, aFragileForLuggage, aLocationForLuggage, aPassengerForLuggage, this);
     flights = new ArrayList<Flight>();
   }
 

@@ -5,7 +5,7 @@ package ca.mcgill.ecse681.lts.model;
 import java.util.*;
 import java.sql.Date;
 
-// line 22 "../../../../../LTS.ump"
+// line 33 "../../../../../LTS.ump"
 public class Passenger
 {
 
@@ -34,12 +34,12 @@ public class Passenger
 
   public Passenger(String aPassportID, String aLastName, String aFirstName, boolean aExpiredPassport, float aLuggageWeightLimit, boolean aLoungeAccess, boolean aOverweightLuggagePrivilege, LTS aLTS)
   {
-    // line 36 "../../../../../LTS.ump"
+    // line 47 "../../../../../LTS.ump"
     if (aFirstName == null || aFirstName.length() == 0) {
     	    	throw new RuntimeException("The name of a passenger cannot be empty.");
     	    }
     // END OF UMPLE BEFORE INJECTION
-    // line 47 "../../../../../LTS.ump"
+    // line 58 "../../../../../LTS.ump"
     if (aLastName == null || aLastName.length() == 0) {
     	    	throw new RuntimeException("The name of a passenger cannot be empty.");
     	    }
@@ -80,7 +80,7 @@ public class Passenger
   public boolean setLastName(String aLastName)
   {
     boolean wasSet = false;
-    // line 52 "../../../../../LTS.ump"
+    // line 63 "../../../../../LTS.ump"
     if (aLastName == null || aLastName.length() == 0) {
     			return false;
     		}
@@ -93,7 +93,7 @@ public class Passenger
   public boolean setFirstName(String aFirstName)
   {
     boolean wasSet = false;
-    // line 41 "../../../../../LTS.ump"
+    // line 52 "../../../../../LTS.ump"
     if (aFirstName == null || aFirstName.length() == 0) {
     			return false;
     		}
@@ -466,7 +466,7 @@ public class Passenger
     return 2;
   }
 
-  public Luggage addLuggage(float aWeight, boolean aPriority, boolean aFragile, Tag aTag)
+  public Luggage addLuggage(float aWeight, boolean aPriority, boolean aFragile, String aLocation, Tag aTag)
   {
     if (numberOfLuggages() >= maximumNumberOfLuggages())
     {
@@ -474,7 +474,7 @@ public class Passenger
     }
     else
     {
-      return new Luggage(aWeight, aPriority, aFragile, this, aTag);
+      return new Luggage(aWeight, aPriority, aFragile, aLocation, this, aTag);
     }
   }
 

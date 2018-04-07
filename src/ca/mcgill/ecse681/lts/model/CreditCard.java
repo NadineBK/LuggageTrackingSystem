@@ -5,7 +5,7 @@ package ca.mcgill.ecse681.lts.model;
 import java.sql.Date;
 import java.util.*;
 
-// line 114 "../../../../../LTS.ump"
+// line 125 "../../../../../LTS.ump"
 public class CreditCard
 {
 
@@ -29,12 +29,12 @@ public class CreditCard
 
   public CreditCard(int aCcnumber, Date aExpirydate, String aCcname, int aSecurityCode, LTS aLTS)
   {
-    // line 121 "../../../../../LTS.ump"
+    // line 132 "../../../../../LTS.ump"
     if (!aExpirydate.after(new Date((Calendar.getInstance().getTime()).getTime()))) {
     			throw new RuntimeException("The expiry date of a credit card cannot be in the past or the present day.");
     		}
     // END OF UMPLE BEFORE INJECTION
-    // line 134 "../../../../../LTS.ump"
+    // line 145 "../../../../../LTS.ump"
     if (aCcname == null || aCcname.length() == 0) {
     	    	throw new RuntimeException("The name on the credit card cannot be empty.");
     	    }
@@ -73,7 +73,7 @@ public class CreditCard
   public boolean setExpirydate(Date aExpirydate)
   {
     boolean wasSet = false;
-    // line 126 "../../../../../LTS.ump"
+    // line 137 "../../../../../LTS.ump"
     if (!aExpirydate.after(new Date((Calendar.getInstance().getTime()).getTime()))) {
     			return false;
     		}
@@ -86,7 +86,7 @@ public class CreditCard
   public boolean setCcname(String aCcname)
   {
     boolean wasSet = false;
-    // line 139 "../../../../../LTS.ump"
+    // line 150 "../../../../../LTS.ump"
     if (aCcname == null || aCcname.length() == 0) {
     			return false;
     		}

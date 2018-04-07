@@ -5,7 +5,7 @@ package ca.mcgill.ecse681.lts.model;
 import java.sql.Date;
 import java.util.*;
 
-// line 58 "../../../../../LTS.ump"
+// line 69 "../../../../../LTS.ump"
 public class Flight
 {
 
@@ -31,22 +31,22 @@ public class Flight
 
   public Flight(String aSource, String aDestination, Date aFlightdate, String aAirline, String aNumber, LTS aLTS)
   {
-    // line 69 "../../../../../LTS.ump"
+    // line 80 "../../../../../LTS.ump"
     if (aSource == null || aSource.length() == 0) {
     	    	throw new RuntimeException("The source cannot be empty.");
     	    }
     // END OF UMPLE BEFORE INJECTION
-    // line 80 "../../../../../LTS.ump"
+    // line 91 "../../../../../LTS.ump"
     if (aDestination == null || aDestination.length() == 0) {
     	    	throw new RuntimeException("The destination cannot be empty.");
     	    }
     // END OF UMPLE BEFORE INJECTION
-    // line 91 "../../../../../LTS.ump"
+    // line 102 "../../../../../LTS.ump"
     if (aAirline == null || aAirline.length() == 0) {
     	    	throw new RuntimeException("The airline cannot be empty.");
     	    }
     // END OF UMPLE BEFORE INJECTION
-    // line 102 "../../../../../LTS.ump"
+    // line 113 "../../../../../LTS.ump"
     if (aNumber == null || aNumber.length() == 0) {
     	    	throw new RuntimeException("The flight number cannot be empty.");
     	    }
@@ -72,7 +72,7 @@ public class Flight
   public boolean setSource(String aSource)
   {
     boolean wasSet = false;
-    // line 74 "../../../../../LTS.ump"
+    // line 85 "../../../../../LTS.ump"
     if (aSource == null || aSource.length() == 0) {
     			return false;
     		}
@@ -85,7 +85,7 @@ public class Flight
   public boolean setDestination(String aDestination)
   {
     boolean wasSet = false;
-    // line 85 "../../../../../LTS.ump"
+    // line 96 "../../../../../LTS.ump"
     if (aDestination == null || aDestination.length() == 0) {
     			return false;
     		}
@@ -106,7 +106,7 @@ public class Flight
   public boolean setAirline(String aAirline)
   {
     boolean wasSet = false;
-    // line 96 "../../../../../LTS.ump"
+    // line 107 "../../../../../LTS.ump"
     if (aAirline == null || aAirline.length() == 0) {
     			return false;
     		}
@@ -119,7 +119,7 @@ public class Flight
   public boolean setNumber(String aNumber)
   {
     boolean wasSet = false;
-    // line 107 "../../../../../LTS.ump"
+    // line 118 "../../../../../LTS.ump"
     if (aNumber == null || aNumber.length() == 0) {
     			return false;
     		}

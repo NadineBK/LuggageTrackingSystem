@@ -52,6 +52,7 @@ public class LTSLuggageRegistration extends JPanel {
 	private JLabel lblFragile;
 	private JLabel lblPriority;
 	private float overweight;
+	private JLabel lblLocationTracking;
 
 
 	/**
@@ -61,6 +62,18 @@ public class LTSLuggageRegistration extends JPanel {
 		setBounds(100, 100, 676, 504);
 		setBackground(new Color(135, 206, 235));
 		setLayout(null);
+		
+		lblLocationTracking = new JLabel("New label");
+		lblLocationTracking.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLocationTracking.setBounds(222, 414, 253, 14);
+		lblLocationTracking.setVisible(false);
+		add(lblLocationTracking);
+		
+		btnAddAnotherLuggage = new JButton("Add another luggage");
+		btnAddAnotherLuggage.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
+		btnAddAnotherLuggage.setBounds(235, 441, 229, 23);
+		add(btnAddAnotherLuggage);
+		btnAddAnotherLuggage.setEnabled(false);
 		
 		txtRegistration = new JTextField();
 		txtRegistration.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -87,16 +100,23 @@ public class LTSLuggageRegistration extends JPanel {
 		btnCheckIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!weight.getText().isEmpty()){
-					if(Float.valueOf(weight.getText()) > Float.valueOf(Controller.getPassengerWeightLimit(passportID))){
+					if(Controller.getLuggageCount(passportID)>=2)
+					{
 						btnRegisterLuggage.setEnabled(false);
-						btnPayForOverweight.setEnabled(true);
-						overweight = (int) Math.ceil(Float.valueOf(weight.getText()) - Float.valueOf(Controller.getPassengerWeightLimit(passportID)));
-					}else{
-						btnRegisterLuggage.setEnabled(true);
 						btnPayForOverweight.setEnabled(false);
-
 					}
-				
+					else
+					{
+						if(Float.valueOf(weight.getText()) > Float.valueOf(Controller.getPassengerWeightLimit(passportID))){
+							btnRegisterLuggage.setEnabled(false);
+							btnPayForOverweight.setEnabled(true);
+							overweight = (int) Math.ceil(Float.valueOf(weight.getText()) - Float.valueOf(Controller.getPassengerWeightLimit(passportID)));
+						}else{
+							btnRegisterLuggage.setEnabled(true);
+							btnPayForOverweight.setEnabled(false);
+
+						}
+					}				
 				}else{
 					JOptionPane.showMessageDialog(null, "Please enter the weight of your luggage!", "LuggageTrackingSystem", 1);
 				}
@@ -215,7 +235,7 @@ public class LTSLuggageRegistration extends JPanel {
 				}
 				
 				Passenger passenger = Controller.getPassenger(passportID);
-				Luggage luggage  = Controller.createLuggage(Float.valueOf(weight.getText()), chckbxPriority.isSelected(), chckbxFragile.isSelected(), passenger);
+				Luggage luggage  = Controller.createLuggage(Float.valueOf(weight.getText()), chckbxPriority.isSelected(), chckbxFragile.isSelected(), Controller.getFlightSource(passportID), passenger);
 				
 				
 				table.getModel().setValueAt(Controller.getFlightSource(passportID), 0, 1);	
@@ -226,12 +246,21 @@ public class LTSLuggageRegistration extends JPanel {
 				table.getModel().setValueAt(luggage.getTag().getLuggageID(), 5, 1);	
 				
 				btnRegisterLuggage.setEnabled(false);
+				lblLocationTracking.setVisible(true);
+				lblLocationTracking.setText("Luggage tracked from " + Controller.getFlightSource(passportID));
+
+				if(Controller.getLuggageCount(passportID)<2)
+				{
+					btnAddAnotherLuggage.setEnabled(true);
+				}
+				else
+				{
+					btnAddAnotherLuggage.setEnabled(false);
+				}
 			}
 		});
 		
 		
-		
-		btnAddAnotherLuggage = new JButton("Add another luggage");
 		btnAddAnotherLuggage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				weight.setText("");
@@ -245,11 +274,9 @@ public class LTSLuggageRegistration extends JPanel {
 				lblFragile.setVisible(false);
 				btnRegisterLuggage.setEnabled(false);
 				btnPayForOverweight.setEnabled(false);
+				lblLocationTracking.setVisible(false);
 			}
 		});
-		btnAddAnotherLuggage.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
-		btnAddAnotherLuggage.setBounds(233, 433, 229, 23);
-		add(btnAddAnotherLuggage);
 		
 		table = new JTable();
 		table.setFont(new Font("Trebuchet MS", Font.BOLD, 13));
@@ -286,7 +313,6 @@ public class LTSLuggageRegistration extends JPanel {
 		
 		add(table);
 		
-
 	}
 
 
@@ -294,5 +320,4 @@ public class LTSLuggageRegistration extends JPanel {
 		btnRegisterLuggage.setEnabled(true);
 		btnPayForOverweight.setEnabled(false);
 	}
-	
 }
