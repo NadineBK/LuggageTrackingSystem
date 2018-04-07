@@ -9,9 +9,7 @@
 - Right-click LTSApplication.java in the ca.mcgill.ecse681.lts.application package and Run as > Java Application to open our Self-Adaptive Luggage Tracking System.
 
 ### Note
-On subsequent runs of the application, ensure that the Population.main() line of LTSApplication.java is commented out so that the database creation does not return an error due to the already existing file. <br />
-*OR* <br />
-Delete the data.xml file again while keeping the Population.main() line uncommented to recreate the predefined database. This will however eliminate any changes made to the database when the application was run the first time such as luggage tag creation associated to a passenger. 
+On subsequent runs of the application, delete the data.xml file. Note that this will unfortunately eliminate any changes made to the database when the application was run the previous time. The reason for doing so originates from a persistence error which occurs when the application is loaded with an existing data.xml file. We apologize for the inconvenience. 
 
 ### Important considerations
 - We used the Model-View-Controller pattern to implement our application.
