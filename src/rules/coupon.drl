@@ -22,6 +22,6 @@ rule "Increase weight limit"
         passenger : Passenger (passenger.getAirCanadaFlightCount() >= 5)
     then
     	passenger.setLuggageWeightLimit(32.0f);
-        JOptionPane.showMessageDialog(null, "We see that you've have flown with us " + passenger.getAirCanadaFlightCount() + " times. To thank you for your loyalty, we have increased your weight limit.\nThank you for flying with us.");
+        JOptionPane.showMessageDialog(null, "We see that you have flown with us " + passenger.getAirCanadaFlightCount() + " times. To thank you for your loyalty, we have increased your weight limit.\nThank you for flying with us.");
 
 end
