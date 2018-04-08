@@ -3,6 +3,16 @@ package ca.mcgill.ecse681.lts.controller;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import org.kie.api.KieBase;
+import org.kie.api.KieServices;
+import org.kie.api.builder.KieBuilder;
+import org.kie.api.builder.KieFileSystem;
+import org.kie.api.builder.Message;
+import org.kie.api.builder.Results;
+import org.kie.api.runtime.KieContainer;
+import org.kie.api.runtime.KieSession;
+
 import ca.mcgill.ecse681.lts.model.LTS;
 import ca.mcgill.ecse681.lts.model.Luggage;
 import ca.mcgill.ecse681.lts.model.Passenger;
@@ -12,28 +22,85 @@ import ca.mcgill.ecse681.lts.model.CreditCard;
 import ca.mcgill.ecse681.lts.model.Flight;
 import ca.mcgill.ecse681.lts.persistence.PersistenceXStream;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Date;
 
 public class Controller {
-
+	
+	// defining a KieSession variable here that enables use of drools knowledgebase
+	private static KieSession kSession;
+	
 	public Controller(){
 	}
 	
-	/*public void createElection(String aName, String aIsByElection, Date aDateOfElectionForScheduledElection) throws InvalidInputException {
-		try 
-		{
-			Election elec;
-			elec = new Election (aName, aIsByElection, aDateOfElectionForScheduledElection);
-			ElectionManager em = ElectionManager.getInstance();
-			em.addElection(elec);
-			PersistenceXStream.saveToXMLwithXStream(em);
+	/**
+	 * Initializes kSession to allow execution of DROOLS rules. Performs all necessary steps. Establishes the "knowledge base"
+	 */
+	public static void initKnowledgeBase() {
+		System.out.println("Executing initialization of knowledge base...");
+		try {
+			System.out.println(new File(".").getCanonicalPath());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
-		catch (RuntimeException exp) 
-		{
-			throw new InvalidInputException(exp.getMessage());
-		}
+		if (kSession == null) {
+			
+			//The code below that establishes the KieSession is a lightly-modified version from stackoverflow. 
+			//link: https://stackoverflow.com/questions/24558451/cant-run-hello-world-on-drools-dlr-files-are-not-picked-from-classpath-by-kie
+			
+			KieServices ks = KieServices.Factory.get();
+			KieFileSystem kfs = ks.newKieFileSystem();
 
-	}*/
+		    // for each DRL file, referenced by a plain old path name:
+			try {
+				FileInputStream fis = new FileInputStream("./src/rules/coupon.drl");
+				
+				//The .write method "Adds the given Resource to this KieFileSystem in the specified path". The method is 
+				//confusing; KieFileSystem requires all drl's to be in the src/main/resources path, so this cannot be changed. 
+				//It's necessary for the knowledge base to be established properly
+			    kfs.write("src/main/resources/coupon.drl", ks.getResources().newInputStreamResource( fis ) );
+
+			    KieBuilder kieBuilder = ks.newKieBuilder( kfs ).buildAll();
+			    Results results = kieBuilder.getResults();
+			    
+			    if( results.hasMessages( Message.Level.ERROR ) ){
+			        System.out.println( results.getMessages() );
+			        throw new IllegalStateException( "### errors ###" );
+			    }
+
+			    KieContainer kContainer = ks.newKieContainer( ks.getRepository().getDefaultReleaseId() );
+
+			    KieBase kieBase = kContainer.getKieBase();
+			    kSession = kContainer.newKieSession();
+				
+			} catch (FileNotFoundException e) {
+				System.out.println("Error reading coupon.drl: " + e);
+				
+			}
+
+		}
+	}
+	
+	/**
+	 * Runs all coupon-related DROOLS rules, and shows coupons to user
+	 * Method can be refined at later date to actually accommodate committing this data back to the database somehow
+	 * 
+	 * @param passportID : the passport ID of the passenger
+	 */
+	public static void executeCouponRules(String passportID) {
+		Passenger mPassenger = getPassenger(passportID);
+		
+		if (kSession != null) {
+			System.out.println("Inserting passenger and firing all rules");
+			kSession.insert(mPassenger);
+			kSession.fireAllRules();	//since all rules are coupon-related, this needs to be changed when it's no longer the case
+		}
+		
+	}
 	
 	public static int populatePassengerDetails(String passportID) {
 		LTS lts = LTS.getInstance();

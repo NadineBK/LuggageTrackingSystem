@@ -1,0 +1,35 @@
+<lts id="1">
+  <passengers id="2">
+    <passenger id="3">
+      <passportID>ABC123</passportID>
+      <lastName>John</lastName>
+      <firstName>Patrick</firstName>
+      <expiredPassport>false</expiredPassport>
+      <luggageWeightLimit>23.0</luggageWeightLimit>
+      <loungeAccess>false</loungeAccess>
+      <overweightLuggagePrivilege>false</overweightLuggagePrivilege>
+      <flights id="4">
+        <flight id="5">
+          <source>Montreal</source>
+          <destination>New York</destination>
+          <flightdate id="6">2018-04-08</flightdate>
+          <airline>Air Canada</airline>
+          <number>AC 345</number>
+          <tags id="7"/>
+          <lTS reference="1"/>
+          <passengers id="8">
+            <passenger reference="3"/>
+          </passengers>
+        </flight>
+      </flights>
+      <transactions id="9"/>
+      <lTS reference="1"/>
+      <luggages id="10"/>
+    </passenger>
+  </passengers>
+  <flights id="11">
+    <flight reference="5"/>
+  </flights>
+  <transactions id="12"/>
+  <creditCards id="13"/>
+</lts>

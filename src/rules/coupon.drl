@@ -1,0 +1,26 @@
+//created on: 8-Apr-2018
+package couponrules
+
+import ca.mcgill.ecse681.lts.model.Passenger
+import javax.swing.JOptionPane;
+
+dialect "java"
+
+rule "Grant lounge access coupon"
+
+    when
+        passenger : Passenger (passenger.getLoungeAccess()==false)
+    then
+    	System.out.println("Granting lounge access coupon...");
+        JOptionPane.showMessageDialog(null, "You have received the following coupon:\n30% off your next lounge access purchase.\n\nThank you for flying with us.");
+
+end
+
+rule "Your Second Rule"
+    //include attributes such as "salience" here...
+    when
+        
+    then
+        System.out.println("File is being read");
+
+end

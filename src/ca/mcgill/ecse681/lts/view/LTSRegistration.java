@@ -265,6 +265,16 @@ public class LTSRegistration extends JPanel {
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(canGoToNext){
+					//Should perform drools rule-checking to display coupon details to customer before moving onto next display page
+					
+					//First, need to always ensure the knowledgebase is initialized.
+					Controller.initKnowledgeBase();		// Does nothing if already initialized
+					
+					//Next, grab passport ID. This will be used to run the coupon-checking rules and display to the user accordingly
+					System.out.println("Executing coupon rules...");
+					String passportIDString = passportID.getText();
+					Controller.executeCouponRules(passportIDString);
+					
 					setVisible(false);
 	 				LTSLuggageRegistration ltslr = new LTSLuggageRegistration(parent, passportID.getText());
 	 				parent.setContentPane(ltslr);

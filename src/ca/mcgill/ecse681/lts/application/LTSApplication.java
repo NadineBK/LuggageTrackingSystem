@@ -10,6 +10,7 @@ public class LTSApplication {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
 		// load model
 		PersistenceLTS.loadLTS();
 		

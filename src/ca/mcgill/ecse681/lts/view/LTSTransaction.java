@@ -221,7 +221,7 @@ public class LTSTransaction extends JPanel {
 						return;
 					}
 				}
-				if(!(nameOnCard.getText().matches("^[\\p{Lu} .'-]+$") && (nameOnCard.getText().length()>0))) {	
+				if(!(nameOnCard.getText().matches("^[\\p{L} .'-]+$") && (nameOnCard.getText().length()>0))) {	
 					allValid=false;
 					JOptionPane.showMessageDialog(null, "Invalid Name on Card!", "LuggageTrackingSystem", 1);
 					return;
