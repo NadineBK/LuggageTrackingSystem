@@ -5,10 +5,19 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import ca.mcgill.ecse681.lts.controller.Controller;
+import ca.mcgill.ecse681.lts.model.CreditCard;
+import ca.mcgill.ecse681.lts.model.LTS;
+import ca.mcgill.ecse681.lts.model.Passenger;
+
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.util.Calendar;
 import java.awt.event.ActionEvent;
 
 public class LTSTransaction extends JPanel {
@@ -21,6 +30,7 @@ public class LTSTransaction extends JPanel {
 	private JLabel lblAmount;
 	private JTextField amount;
 	private JButton btnFinish;
+	private JButton btnValidate;
 	private JButton btnCancel;
 	private JLabel lblCreditCardNumber;
 	private JTextField creditCardNumber;
@@ -38,7 +48,7 @@ public class LTSTransaction extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public LTSTransaction(final JFrame parent, final JPanel lr, float overweight) {
+	public LTSTransaction(final JFrame parent, final JPanel lr, float overweight, String passportID) {
 		setBounds(100, 100, 676, 504);
 		setBackground(new Color(135, 206, 235));
 		setLayout(null);
@@ -67,15 +77,11 @@ public class LTSTransaction extends JPanel {
 		amount.setColumns(10);
 		
 		btnFinish = new JButton("PAY");
-		btnFinish.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				lblOutput.setText("Transaction Successful!");
-				lblOutput.setEnabled(true);
-			}
-		});
+		
 		btnFinish.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
 		btnFinish.setBounds(290, 314, 89, 23);
 		add(btnFinish);
+		btnFinish.setEnabled(false);
 		
 		btnCancel = new JButton("CANCEL");
 		btnCancel.addActionListener(new ActionListener() {
@@ -113,6 +119,7 @@ public class LTSTransaction extends JPanel {
 		year.setBounds(437, 179, 42, 20);
 		add(year);
 		year.setColumns(10);
+		
 		
 		monthYear = new JLabel("/");
 		monthYear.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
@@ -165,6 +172,7 @@ public class LTSTransaction extends JPanel {
 		btnPrintReceipt.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
 		btnPrintReceipt.setBounds(268, 380, 139, 23);
 		add(btnPrintReceipt);
+		btnPrintReceipt.setEnabled(false);
 		
 		lblOutput = new JLabel("");
 		lblOutput.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
@@ -172,5 +180,77 @@ public class LTSTransaction extends JPanel {
 		lblOutput.setEnabled(false);
 		lblOutput.setBounds(258, 348, 155, 21);
 		add(lblOutput);
+		
+		btnValidate = new JButton("Validate Card");
+		btnValidate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				boolean allValid = true;
+				//credit card is 16 numbers, year and month after today
+				int currentMonth = Calendar.getInstance().getTime().getMonth();
+				int currentYear = Calendar.getInstance().getTime().getYear()-2000;
+				if(!(month.getText().matches("[0-9]+") && ((month.getText().length() ==1) || (month.getText().length() ==2))) ) {	
+					allValid=false;
+					JOptionPane.showMessageDialog(null, "Invalid Month!", "LuggageTrackingSystem", 1);
+					return;
+				}
+				if(!(year.getText().matches("[0-9]+") && (year.getText().length() ==2)) ) {
+					
+					allValid=false;
+					JOptionPane.showMessageDialog(null, "Invalid Year!", "LuggageTrackingSystem", 1);
+					return;
+				}
+				if(Integer.valueOf(year.getText())>currentYear){
+					//do nothing
+				}
+				else if(Integer.valueOf(year.getText())<currentYear){
+					allValid=false;
+					JOptionPane.showMessageDialog(null, "Credit Card is expired!", "LuggageTrackingSystem", 1);
+					return;
+				}else{
+					if(Integer.valueOf(month.getText())<currentMonth){
+						allValid=false;
+						JOptionPane.showMessageDialog(null, "Credit Card is expired!", "LuggageTrackingSystem", 1);
+						return;
+					}
+				}
+				
+				if(!(creditCardNumber.getText().matches("[0-9]+") && creditCardNumber.getText().length() ==16)) {
+					allValid=false;
+					//joptionPane
+					JOptionPane.showMessageDialog(null, "Invalid Credit Card Number!", "LuggageTrackingSystem", 1);
+					return;
+				}
+				
+				//security code is 3 numbers
+				if(!(securityCode.getText().matches("[0-9]+") && securityCode.getText().length() ==3)) {
+					allValid=false;
+					JOptionPane.showMessageDialog(null, "Invalid Security Code!", "LuggageTrackingSystem", 1);
+					return;
+				}
+				if(allValid){
+					btnFinish.setEnabled(true);
+					//, Date aExpirydate, String aCcname, int aSecurityCode
+					Date exDate = new Date(Calendar.getInstance().getTime().getTime());
+					exDate.setMonth(Integer.valueOf(month.getText()));
+					exDate.setYear(Integer.valueOf(year.getText()));
+					Controller.createTransaction(Float.valueOf(amount.getText()), true, 
+							creditCardNumber.getText(), passportID, exDate,  nameOnCard.getText(), Integer.valueOf(securityCode.getText()));
+					
+					
+				}
+			}
+		});
+		btnValidate.setBounds(500, 263, 125, 20);
+		btnValidate.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
+		add(btnValidate);
+		
+		btnFinish.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				lblOutput.setText("Transaction Successful!");
+				lblOutput.setEnabled(true);
+				btnPrintReceipt.setEnabled(true);
+				btnFinish.setEnabled(false);
+			}
+		});
 	}
 }

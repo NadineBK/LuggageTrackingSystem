@@ -7,6 +7,8 @@ import ca.mcgill.ecse681.lts.model.LTS;
 import ca.mcgill.ecse681.lts.model.Luggage;
 import ca.mcgill.ecse681.lts.model.Passenger;
 import ca.mcgill.ecse681.lts.model.Tag;
+import ca.mcgill.ecse681.lts.model.Transaction;
+import ca.mcgill.ecse681.lts.model.CreditCard;
 import ca.mcgill.ecse681.lts.model.Flight;
 import ca.mcgill.ecse681.lts.persistence.PersistenceXStream;
 
@@ -191,11 +193,11 @@ public class Controller {
 		return "";
 	}
 
-	public static Luggage createLuggage(float aWeight, boolean aPriority, boolean aFragile, String location, Passenger passenger)
+	public static Luggage createLuggage(float aWeight, boolean aPriority, boolean aFragile, String passportID)
 	{
 		LTS lts = LTS.getInstance();
-		
-		
+		String location = getFlightSource(passportID);
+		Passenger passenger = getPassenger(passportID);
 		Luggage luggage = new Luggage (aWeight, aPriority, aFragile, location, passenger);
 		passenger.addLuggage(luggage);
 		
@@ -212,6 +214,20 @@ public class Controller {
 			}
 		}
 		return 0;
+	}
+
+	public static Transaction createTransaction(float aAmount, boolean aPaid, 
+			String aCreditCard, String passportID, Date aExpirydate, String aCcname, int aSecurityCode) {
+		LTS lts = LTS.getInstance();
+		
+		CreditCard creditCard = new CreditCard(Integer.valueOf(aCreditCard), aExpirydate, aCcname, aSecurityCode, lts );		
+		Passenger passenger = getPassenger(passportID);
+		
+		Transaction tr = new Transaction (aAmount, aPaid, new Date(Calendar.getInstance().getTime().getTime()),lts, passenger, creditCard);
+		passenger.addTransaction(tr);
+		PersistenceXStream.saveToXMLwithXStream(lts);	
+		return tr;
+		
 	}
 
 }

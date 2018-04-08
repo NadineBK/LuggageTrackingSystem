@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 
-import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,7 +22,6 @@ import javax.swing.table.DefaultTableModel;
 
 import ca.mcgill.ecse681.lts.controller.Controller;
 import ca.mcgill.ecse681.lts.model.Luggage;
-import ca.mcgill.ecse681.lts.model.Passenger;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -201,7 +199,7 @@ public class LTSLuggageRegistration extends JPanel {
 		btnPayForOverweight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
- 				LTSTransaction ltst = new LTSTransaction(parent, LTSLuggageRegistration.this, overweight);
+ 				LTSTransaction ltst = new LTSTransaction(parent, LTSLuggageRegistration.this, overweight, passportID);
  				parent.setContentPane(ltst);
 			}
 		});
@@ -234,8 +232,8 @@ public class LTSLuggageRegistration extends JPanel {
 					lblPriority.setVisible(false);
 				}
 				
-				Passenger passenger = Controller.getPassenger(passportID);
-				Luggage luggage  = Controller.createLuggage(Float.valueOf(weight.getText()), chckbxPriority.isSelected(), chckbxFragile.isSelected(), Controller.getFlightSource(passportID), passenger);
+				
+				Luggage luggage  = Controller.createLuggage(Float.valueOf(weight.getText()), chckbxPriority.isSelected(), chckbxFragile.isSelected(), passportID);
 				
 				
 				table.getModel().setValueAt(Controller.getFlightSource(passportID), 0, 1);	

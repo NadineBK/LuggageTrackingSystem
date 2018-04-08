@@ -278,6 +278,7 @@ public class LTSRegistration extends JPanel {
 		btnNext.setBounds(566, 459, 89, 23);
 		add(btnNext);
 		
+		
 		btnCancel = new JButton("CANCEL");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
