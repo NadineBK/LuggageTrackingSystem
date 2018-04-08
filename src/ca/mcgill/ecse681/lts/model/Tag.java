@@ -4,7 +4,7 @@
 package ca.mcgill.ecse681.lts.model;
 import java.util.*;
 
-// line 170 "../../../../../LTS.ump"
+// line 157 "../../../../../LTS.ump"
 public class Tag
 {
 

@@ -4,7 +4,7 @@
 package ca.mcgill.ecse681.lts.model;
 import java.sql.Date;
 
-// line 160 "../../../../../LTS.ump"
+// line 147 "../../../../../LTS.ump"
 public class Transaction
 {
 

@@ -216,18 +216,15 @@ public class Controller {
 		return 0;
 	}
 
-	public static Transaction createTransaction(float aAmount, boolean aPaid, 
+	public static void createTransaction(float aAmount, boolean aPaid, 
 			String aCreditCard, String passportID, Date aExpirydate, String aCcname, int aSecurityCode) {
 		LTS lts = LTS.getInstance();
-		
-		CreditCard creditCard = new CreditCard(Integer.valueOf(aCreditCard), aExpirydate, aCcname, aSecurityCode, lts );		
+		CreditCard creditCard = new CreditCard(aCreditCard, aExpirydate, aCcname, aSecurityCode, lts);
 		Passenger passenger = getPassenger(passportID);
-		
-		Transaction tr = new Transaction (aAmount, aPaid, new Date(Calendar.getInstance().getTime().getTime()),lts, passenger, creditCard);
-		passenger.addTransaction(tr);
+		Transaction tr = new Transaction (aAmount, aPaid, new Date(Calendar.getInstance().getTime().getTime()), lts, passenger, creditCard);
+		passenger.addTransaction(tr);		
 		PersistenceXStream.saveToXMLwithXStream(lts);	
-		return tr;
-		
+				
 	}
 
 }

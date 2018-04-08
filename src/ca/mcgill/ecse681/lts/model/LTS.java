@@ -391,7 +391,7 @@ public class LTS
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public CreditCard addCreditCard(int aCcnumber, Date aExpirydate, String aCcname, int aSecurityCode)
+  public CreditCard addCreditCard(String aCcnumber, Date aExpirydate, String aCcname, int aSecurityCode)
   {
     return new CreditCard(aCcnumber, aExpirydate, aCcname, aSecurityCode, this);
   }

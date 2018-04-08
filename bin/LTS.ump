@@ -15,6 +15,17 @@ class Luggage
 	[weight > 0]
 	Boolean priority;
 	Boolean fragile;
+	location;
+	before constructor {
+	    if (aLocation == null || aLocation.length() == 0) {
+	    	throw new RuntimeException("The name of a passenger cannot be empty.");
+	    }
+	}
+	before setLocation{
+		if (aLocation == null || aLocation.length() == 0) {
+			return false;
+		}
+  	}
 	0..2 -<@> 1 Passenger;		
 	1 <@>- 1 Tag;
  }
@@ -113,21 +124,8 @@ class Flight
 
 class CreditCard
 {
-	Integer ccnumber;
-	[ccnumber > 0]
+	ccnumber;
 	Date expirydate;
-		
-	before constructor {
-    	if (!aExpirydate.after(new Date((Calendar.getInstance().getTime()).getTime()))) {
-			throw new RuntimeException("The expiry date of a credit card cannot be in the past or the present day.");
-		}
-  	}
-	before setExpirydate {
-		if (!aExpirydate.after(new Date((Calendar.getInstance().getTime()).getTime()))) {
-			return false;
-		}
-	}
-	
 	ccname;
 	
 	before constructor {

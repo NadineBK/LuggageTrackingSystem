@@ -14,7 +14,7 @@ public class CreditCard
   //------------------------
 
   //CreditCard Attributes
-  private int ccnumber;
+  private String ccnumber;
   private Date expirydate;
   private String ccname;
   private int securityCode;
@@ -27,14 +27,9 @@ public class CreditCard
   // CONSTRUCTOR
   //------------------------
 
-  public CreditCard(int aCcnumber, Date aExpirydate, String aCcname, int aSecurityCode, LTS aLTS)
+  public CreditCard(String aCcnumber, Date aExpirydate, String aCcname, int aSecurityCode, LTS aLTS)
   {
     // line 132 "../../../../../LTS.ump"
-    if (!aExpirydate.after(new Date((Calendar.getInstance().getTime()).getTime()))) {
-    			throw new RuntimeException("The expiry date of a credit card cannot be in the past or the present day.");
-    		}
-    // END OF UMPLE BEFORE INJECTION
-    // line 145 "../../../../../LTS.ump"
     if (aCcname == null || aCcname.length() == 0) {
     	    	throw new RuntimeException("The name on the credit card cannot be empty.");
     	    }
@@ -51,7 +46,7 @@ public class CreditCard
     }
     if (aSecurityCode<=0)
     {
-      throw new RuntimeException("Please provide a valid ccnumber and securityCode");
+      throw new RuntimeException("Please provide a valid securityCode");
     }
   }
 
@@ -59,25 +54,17 @@ public class CreditCard
   // INTERFACE
   //------------------------
 
-  public boolean setCcnumber(int aCcnumber)
+  public boolean setCcnumber(String aCcnumber)
   {
     boolean wasSet = false;
-    if (aCcnumber>0)
-    {
     ccnumber = aCcnumber;
     wasSet = true;
-    }
     return wasSet;
   }
 
   public boolean setExpirydate(Date aExpirydate)
   {
     boolean wasSet = false;
-    // line 137 "../../../../../LTS.ump"
-    if (!aExpirydate.after(new Date((Calendar.getInstance().getTime()).getTime()))) {
-    			return false;
-    		}
-    // END OF UMPLE BEFORE INJECTION
     expirydate = aExpirydate;
     wasSet = true;
     return wasSet;
@@ -86,7 +73,7 @@ public class CreditCard
   public boolean setCcname(String aCcname)
   {
     boolean wasSet = false;
-    // line 150 "../../../../../LTS.ump"
+    // line 137 "../../../../../LTS.ump"
     if (aCcname == null || aCcname.length() == 0) {
     			return false;
     		}
@@ -107,7 +94,7 @@ public class CreditCard
     return wasSet;
   }
 
-  public int getCcnumber()
+  public String getCcnumber()
   {
     return ccnumber;
   }

@@ -85,16 +85,4 @@ public class LTSWindow extends JPanel {
 		add(lblNewLabel);
 
 	}
-	
-	/*@Override
-	protected void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		ImageIcon MyImage = new ImageIcon(this.getClass().getResource("/images/icon.png"));
-		Image img = MyImage.getImage();
-		Image newImg = img.getScaledInstance(lblNewLabel_1.getWidth(), lblNewLabel_1.getHeight(), Image.SCALE_SMOOTH);
-		ImageIcon image = new ImageIcon(newImg);
-		image.paintIcon(this, g, 50, 50);
-
-	}*/
-
 }

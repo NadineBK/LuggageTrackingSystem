@@ -17,6 +17,7 @@ import ca.mcgill.ecse681.lts.model.Passenger;
 
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.awt.event.ActionEvent;
 
@@ -29,8 +30,7 @@ public class LTSTransaction extends JPanel {
 	private JTextField txtTransaction;
 	private JLabel lblAmount;
 	private JTextField amount;
-	private JButton btnFinish;
-	private JButton btnValidate;
+	private JButton btnPay;
 	private JButton btnCancel;
 	private JLabel lblCreditCardNumber;
 	private JTextField creditCardNumber;
@@ -76,12 +76,12 @@ public class LTSTransaction extends JPanel {
 		add(amount);
 		amount.setColumns(10);
 		
-		btnFinish = new JButton("PAY");
+		btnPay = new JButton("PAY");
 		
-		btnFinish.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
-		btnFinish.setBounds(290, 314, 89, 23);
-		add(btnFinish);
-		btnFinish.setEnabled(false);
+		btnPay.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
+		btnPay.setBounds(290, 314, 89, 23);
+		add(btnPay);
+		btnPay.setEnabled(true);
 		
 		btnCancel = new JButton("CANCEL");
 		btnCancel.addActionListener(new ActionListener() {
@@ -111,11 +111,13 @@ public class LTSTransaction extends JPanel {
 		add(lblExpiryDate);
 		
 		month = new JTextField();
+		month.setHorizontalAlignment(SwingConstants.CENTER);
 		month.setBounds(365, 179, 42, 20);
 		add(month);
 		month.setColumns(10);
 		
 		year = new JTextField();
+		year.setHorizontalAlignment(SwingConstants.CENTER);
 		year.setBounds(437, 179, 42, 20);
 		add(year);
 		year.setColumns(10);
@@ -181,19 +183,25 @@ public class LTSTransaction extends JPanel {
 		lblOutput.setBounds(258, 348, 155, 21);
 		add(lblOutput);
 		
-		btnValidate = new JButton("Validate Card");
-		btnValidate.addActionListener(new ActionListener() {
+		btnPay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				boolean allValid = true;
-				//credit card is 16 numbers, year and month after today
-				int currentMonth = Calendar.getInstance().getTime().getMonth();
-				int currentYear = Calendar.getInstance().getTime().getYear()-2000;
-				if(!(month.getText().matches("[0-9]+") && ((month.getText().length() ==1) || (month.getText().length() ==2))) ) {	
+				//credit card is 16 numbers, year and month after today, security code is 3 numbers
+				if(!(creditCardNumber.getText().matches("[0-9]+") && creditCardNumber.getText().length() ==16)) {
+					allValid=false;
+					//joptionPane
+					JOptionPane.showMessageDialog(null, "Invalid Credit Card Number!", "LuggageTrackingSystem", 1);
+					return;
+				}
+				
+				int currentMonth = Calendar.getInstance().get(Calendar.MONTH)+1;
+				int currentYear = Calendar.getInstance().get(Calendar.YEAR)-2000;
+				if(!(month.getText().matches("[0-9]+") && (month.getText().length() ==2) && ((Integer.valueOf(month.getText()) < 13) && (Integer.valueOf(month.getText()) >0)) )) {	
 					allValid=false;
 					JOptionPane.showMessageDialog(null, "Invalid Month!", "LuggageTrackingSystem", 1);
 					return;
 				}
-				if(!(year.getText().matches("[0-9]+") && (year.getText().length() ==2)) ) {
+				if(!(year.getText().matches("[0-9]+") && (year.getText().length() ==2) && ((Integer.valueOf(year.getText())<100) && (Integer.valueOf(year.getText())>0)) )) {
 					
 					allValid=false;
 					JOptionPane.showMessageDialog(null, "Invalid Year!", "LuggageTrackingSystem", 1);
@@ -213,14 +221,11 @@ public class LTSTransaction extends JPanel {
 						return;
 					}
 				}
-				
-				if(!(creditCardNumber.getText().matches("[0-9]+") && creditCardNumber.getText().length() ==16)) {
+				if(!(nameOnCard.getText().matches("^[\\p{Lu} .'-]+$") && (nameOnCard.getText().length()>0))) {	
 					allValid=false;
-					//joptionPane
-					JOptionPane.showMessageDialog(null, "Invalid Credit Card Number!", "LuggageTrackingSystem", 1);
+					JOptionPane.showMessageDialog(null, "Invalid Name on Card!", "LuggageTrackingSystem", 1);
 					return;
 				}
-				
 				//security code is 3 numbers
 				if(!(securityCode.getText().matches("[0-9]+") && securityCode.getText().length() ==3)) {
 					allValid=false;
@@ -228,28 +233,16 @@ public class LTSTransaction extends JPanel {
 					return;
 				}
 				if(allValid){
-					btnFinish.setEnabled(true);
-					//, Date aExpirydate, String aCcname, int aSecurityCode
-					Date exDate = new Date(Calendar.getInstance().getTime().getTime());
-					exDate.setMonth(Integer.valueOf(month.getText()));
-					exDate.setYear(Integer.valueOf(year.getText()));
+					Date exDate = new Date(Integer.valueOf(year.getText())+100, Integer.valueOf(month.getText()), 0);
 					Controller.createTransaction(Float.valueOf(amount.getText()), true, 
-							creditCardNumber.getText(), passportID, exDate,  nameOnCard.getText(), Integer.valueOf(securityCode.getText()));
-					
-					
+							creditCardNumber.getText(), passportID, exDate, nameOnCard.getText(), Integer.valueOf(securityCode.getText()));
+					lblOutput.setText("Transaction Successful!");
+					lblOutput.setEnabled(true);
+					btnPrintReceipt.setEnabled(true);
+					btnPay.setEnabled(false);
 				}
-			}
-		});
-		btnValidate.setBounds(500, 263, 125, 20);
-		btnValidate.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
-		add(btnValidate);
-		
-		btnFinish.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				lblOutput.setText("Transaction Successful!");
-				lblOutput.setEnabled(true);
-				btnPrintReceipt.setEnabled(true);
-				btnFinish.setEnabled(false);
+				
+				
 			}
 		});
 	}

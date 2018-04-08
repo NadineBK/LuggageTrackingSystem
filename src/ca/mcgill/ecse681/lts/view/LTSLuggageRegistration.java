@@ -25,6 +25,7 @@ import ca.mcgill.ecse681.lts.model.Luggage;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.UIManager;
 
 public class LTSLuggageRegistration extends JPanel {
 
@@ -51,6 +52,7 @@ public class LTSLuggageRegistration extends JPanel {
 	private JLabel lblPriority;
 	private float overweight;
 	private JLabel lblLocationTracking;
+	private JLabel lblOverweightMessage;
 
 
 	/**
@@ -60,6 +62,14 @@ public class LTSLuggageRegistration extends JPanel {
 		setBounds(100, 100, 676, 504);
 		setBackground(new Color(135, 206, 235));
 		setLayout(null);
+		
+		lblOverweightMessage = new JLabel("10$ per extra kg");
+		lblOverweightMessage.setHorizontalAlignment(SwingConstants.CENTER);
+		lblOverweightMessage.setForeground(new Color(51, 51, 51));
+		lblOverweightMessage.setFont(new Font("Trebuchet MS", Font.ITALIC, 13));
+		lblOverweightMessage.setBounds(216, 169, 229, 28);
+		add(lblOverweightMessage);
+		lblOverweightMessage.setVisible(false);
 		
 		lblLocationTracking = new JLabel("New label");
 		lblLocationTracking.setHorizontalAlignment(SwingConstants.CENTER);
@@ -95,6 +105,14 @@ public class LTSLuggageRegistration extends JPanel {
 		weight.setColumns(10);
 				
 		btnCheckIn = new JButton("Check In ->");
+		if(Controller.getLuggageCount(passportID)<2)
+		{
+			btnCheckIn.setEnabled(true);
+		}
+		else
+		{
+			btnCheckIn.setEnabled(false);
+		}
 		btnCheckIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!weight.getText().isEmpty()){
@@ -102,16 +120,21 @@ public class LTSLuggageRegistration extends JPanel {
 					{
 						btnRegisterLuggage.setEnabled(false);
 						btnPayForOverweight.setEnabled(false);
+						lblOverweightMessage.setVisible(false);
+						btnCheckIn.setEnabled(false);
 					}
 					else
 					{
+						btnCheckIn.setEnabled(true);
 						if(Float.valueOf(weight.getText()) > Float.valueOf(Controller.getPassengerWeightLimit(passportID))){
 							btnRegisterLuggage.setEnabled(false);
 							btnPayForOverweight.setEnabled(true);
+							lblOverweightMessage.setVisible(true);
 							overweight = (int) Math.ceil(Float.valueOf(weight.getText()) - Float.valueOf(Controller.getPassengerWeightLimit(passportID)));
 						}else{
 							btnRegisterLuggage.setEnabled(true);
 							btnPayForOverweight.setEnabled(false);
+							lblOverweightMessage.setVisible(false);
 
 						}
 					}				
@@ -129,7 +152,7 @@ public class LTSLuggageRegistration extends JPanel {
 		
 		lblFragile = new JLabel("New label");
 		lblFragile.setBackground(Color.WHITE);
-		lblFragile.setBounds(520, 272, 118, 131);
+		lblFragile.setBounds(520, 289, 105, 114);
 		lblFragile.setBorder(border);
 		ImageIcon MyImage = new ImageIcon(this.getClass().getResource("/images/fragile.jpg"));
 		Image img = MyImage.getImage();
@@ -204,13 +227,13 @@ public class LTSLuggageRegistration extends JPanel {
 			}
 		});
 		btnPayForOverweight.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
-		btnPayForOverweight.setBounds(216, 148, 229, 23);
+		btnPayForOverweight.setBounds(216, 151, 229, 23);
 		add(btnPayForOverweight);
 		
 		btnRegisterLuggage = new JButton("Register Luggage");
 		btnRegisterLuggage.setEnabled(false);
 		btnRegisterLuggage.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
-		btnRegisterLuggage.setBounds(216, 180, 229, 23);
+		btnRegisterLuggage.setBounds(216, 198, 229, 23);
 		add(btnRegisterLuggage);
 		
 		btnRegisterLuggage.addActionListener(new ActionListener() {
@@ -254,6 +277,7 @@ public class LTSLuggageRegistration extends JPanel {
 				else
 				{
 					btnAddAnotherLuggage.setEnabled(false);
+					btnCheckIn.setEnabled(false);
 				}
 			}
 		});
@@ -269,10 +293,13 @@ public class LTSLuggageRegistration extends JPanel {
 					table.getModel().setValueAt("",i,1);
 				}
 				lblPriority.setVisible(false);
-				lblFragile.setVisible(false);
+				lblFragile.setVisible(false);;
 				btnRegisterLuggage.setEnabled(false);
 				btnPayForOverweight.setEnabled(false);
+				lblOverweightMessage.setVisible(false);
 				lblLocationTracking.setVisible(false);
+				btnAddAnotherLuggage.setEnabled(false);
+				btnCheckIn.setEnabled(true);
 			}
 		});
 		
@@ -310,12 +337,13 @@ public class LTSLuggageRegistration extends JPanel {
 			}
 		
 		add(table);
-		
 	}
 
 
 	public void adjustButtons() {
 		btnRegisterLuggage.setEnabled(true);
 		btnPayForOverweight.setEnabled(false);
+		lblOverweightMessage.setVisible(false);
+		btnCheckIn.setEnabled(false);
 	}
 }
