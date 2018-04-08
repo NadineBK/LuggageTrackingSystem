@@ -11,16 +11,17 @@ rule "Grant lounge access coupon"
     when
         passenger : Passenger (passenger.getLoungeAccess()==false)
     then
-    	System.out.println("Granting lounge access coupon...");
-        JOptionPane.showMessageDialog(null, "You have received the following coupon:\n30% off your next lounge access purchase.\n\nThank you for flying with us.");
+    	passenger.setLoungeAccess(true);
+        JOptionPane.showMessageDialog(null, "To thank you for using our Self-Adaptive Luggage Tracking System, we have granted you lounge access for your flight.\nThank you!");
 
 end
 
-rule "Your Second Rule"
+rule "Increase weight limit"
     //include attributes such as "salience" here...
     when
-        
+        passenger : Passenger (passenger.getAirCanadaFlightCount() >= 5)
     then
-        System.out.println("File is being read");
+    	passenger.setLuggageWeightLimit(32.0f);
+        JOptionPane.showMessageDialog(null, "We see that you've have flown with us " + passenger.getAirCanadaFlightCount() + " times. To thank you for your loyalty, we have increased your weight limit.\nThank you for flying with us.");
 
 end

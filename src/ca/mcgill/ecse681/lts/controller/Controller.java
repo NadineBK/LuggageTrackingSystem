@@ -41,12 +41,7 @@ public class Controller {
 	 */
 	public static void initKnowledgeBase() {
 		System.out.println("Executing initialization of knowledge base...");
-		try {
-			System.out.println(new File(".").getCanonicalPath());
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+
 		if (kSession == null) {
 			
 			//The code below that establishes the KieSession is a lightly-modified version from stackoverflow. 
@@ -74,7 +69,7 @@ public class Controller {
 
 			    KieContainer kContainer = ks.newKieContainer( ks.getRepository().getDefaultReleaseId() );
 
-			    KieBase kieBase = kContainer.getKieBase();
+			    //KieBase kieBase = kContainer.getKieBase();
 			    kSession = kContainer.newKieSession();
 				
 			} catch (FileNotFoundException e) {
@@ -293,5 +288,22 @@ public class Controller {
 		PersistenceXStream.saveToXMLwithXStream(lts);	
 				
 	}
-
+	
+	public static void getAirCanadaFlightCount(String passportID) {
+		LTS lts = LTS.getInstance();
+		int count = 0;
+		for (Passenger passenger : lts.getPassengers()) {
+			if(passenger.getPassportID().equals(passportID)) {
+				for(Flight flight: passenger.getFlights()) {
+					if(flight.getAirline().equals("Air Canada")) {
+						count++;
+					}
+				}
+				passenger.setAirCanadaFlightCount(count);
+			}
+		}
+		
+		PersistenceXStream.saveToXMLwithXStream(lts);	
+	}
+	
 }

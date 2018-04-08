@@ -98,6 +98,11 @@ public class LTSRegistration extends JPanel {
 				int i = Controller.populatePassengerDetails(passportID.getText());
 				if(i == 1) {
 					String passportIDString = passportID.getText();
+					
+					//First thing that should be done is updating the Air Canada Flight count. An arbitrary number is assigned 
+					//when invoking Passenger's constructor, so the number is inaccurate
+					Controller.getAirCanadaFlightCount(passportIDString);
+					
 					firstName.setText(Controller.getPassengerFirstName(passportIDString));
 					lastName.setText(Controller.getPassengerLastName(passportIDString));
 					weightLimit.setText(Controller.getPassengerWeightLimit(passportIDString));
@@ -110,6 +115,17 @@ public class LTSRegistration extends JPanel {
 					flightNumber.setText(Controller.getFlightNumber(passportIDString));
 					flightDate.setText(Controller.getFlightDate(passportIDString));
 					airline.setText(Controller.getFlightAirline(passportIDString));
+					
+					//Before proceeding, we run the rules to see if there are any values that should be updated. Namely, 
+					//as of 8/04/2018, the weight limit and lounge access
+					
+					Controller.initKnowledgeBase();		// Does nothing if already initialized
+					Controller.executeCouponRules(passportIDString);
+					
+					//Following the execution of the rules, we redundantly update the weight limit and lounge access. This 
+					//is to dynamically demonstrate a changing value to the user, and reassure them that the updates occurred.
+					weightLimit.setText(Controller.getPassengerWeightLimit(passportIDString));
+					loungeAccess.setText(Controller.getPassengerLoungeAccess(passportIDString));
 					
 					canGoToNext = true;
 					
@@ -265,16 +281,6 @@ public class LTSRegistration extends JPanel {
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(canGoToNext){
-					//Should perform drools rule-checking to display coupon details to customer before moving onto next display page
-					
-					//First, need to always ensure the knowledgebase is initialized.
-					Controller.initKnowledgeBase();		// Does nothing if already initialized
-					
-					//Next, grab passport ID. This will be used to run the coupon-checking rules and display to the user accordingly
-					System.out.println("Executing coupon rules...");
-					String passportIDString = passportID.getText();
-					Controller.executeCouponRules(passportIDString);
-					
 					setVisible(false);
 	 				LTSLuggageRegistration ltslr = new LTSLuggageRegistration(parent, passportID.getText());
 	 				parent.setContentPane(ltslr);

@@ -5,9 +5,10 @@
       <lastName>John</lastName>
       <firstName>Patrick</firstName>
       <expiredPassport>false</expiredPassport>
-      <luggageWeightLimit>23.0</luggageWeightLimit>
-      <loungeAccess>false</loungeAccess>
+      <luggageWeightLimit>32.0</luggageWeightLimit>
+      <loungeAccess>true</loungeAccess>
       <overweightLuggagePrivilege>false</overweightLuggagePrivilege>
+      <AirCanadaFlightCount>5</AirCanadaFlightCount>
       <flights id="4">
         <flight id="5">
           <source>Montreal</source>
@@ -21,15 +22,103 @@
             <passenger reference="3"/>
           </passengers>
         </flight>
+        <flight id="9">
+          <source>New York</source>
+          <destination>Montreal</destination>
+          <flightdate id="10">2018-06-04</flightdate>
+          <airline>Air Canada</airline>
+          <number>AC 444</number>
+          <tags id="11"/>
+          <lTS reference="1"/>
+          <passengers id="12">
+            <passenger reference="3"/>
+          </passengers>
+        </flight>
+        <flight id="13">
+          <source>Montreal</source>
+          <destination>Toronto</destination>
+          <flightdate id="14">2010-03-07</flightdate>
+          <airline>Air Canada</airline>
+          <number>AC 555</number>
+          <tags id="15"/>
+          <lTS reference="1"/>
+          <passengers id="16">
+            <passenger reference="3"/>
+          </passengers>
+        </flight>
+        <flight id="17">
+          <source>Toronto</source>
+          <destination>Montreal</destination>
+          <flightdate id="18">2010-04-01</flightdate>
+          <airline>Air Canada</airline>
+          <number>AC 657</number>
+          <tags id="19"/>
+          <lTS reference="1"/>
+          <passengers id="20">
+            <passenger reference="3"/>
+          </passengers>
+        </flight>
+        <flight id="21">
+          <source>Montreal</source>
+          <destination>Vancouver</destination>
+          <flightdate id="22">2017-05-04</flightdate>
+          <airline>Air Canada</airline>
+          <number>AC 333</number>
+          <tags id="23"/>
+          <lTS reference="1"/>
+          <passengers id="24">
+            <passenger reference="3"/>
+          </passengers>
+        </flight>
       </flights>
-      <transactions id="9"/>
+      <transactions id="25">
+        <transaction id="26">
+          <amount>30.0</amount>
+          <paid>true</paid>
+          <transactiondate id="27">2018-04-08</transactiondate>
+          <transactionID>1</transactionID>
+          <lTS reference="1"/>
+          <passenger reference="3"/>
+          <creditCard id="28">
+            <ccnumber>0123456789012345</ccnumber>
+            <expirydate id="29">2022-01-31</expirydate>
+            <ccname>Mete Aykul</ccname>
+            <securityCode>123</securityCode>
+            <transactions id="30">
+              <transaction reference="26"/>
+            </transactions>
+            <lTS reference="1"/>
+          </creditCard>
+        </transaction>
+      </transactions>
       <lTS reference="1"/>
-      <luggages id="10"/>
+      <luggages id="31">
+        <luggage id="32">
+          <weight>35.0</weight>
+          <priority>true</priority>
+          <fragile>true</fragile>
+          <location>Montreal</location>
+          <passenger reference="3"/>
+          <tag id="33">
+            <luggageID>1</luggageID>
+            <luggage reference="32"/>
+            <flights id="34"/>
+          </tag>
+        </luggage>
+      </luggages>
     </passenger>
   </passengers>
-  <flights id="11">
+  <flights id="35">
     <flight reference="5"/>
+    <flight reference="9"/>
+    <flight reference="13"/>
+    <flight reference="17"/>
+    <flight reference="21"/>
   </flights>
-  <transactions id="12"/>
-  <creditCards id="13"/>
+  <transactions id="36">
+    <transaction reference="26"/>
+  </transactions>
+  <creditCards id="37">
+    <creditCard reference="28"/>
+  </creditCards>
 </lts>

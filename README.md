@@ -5,6 +5,7 @@
 - Import the LuggageTrackingSystem project into Eclipse
 
 ### How to run the application
+- The application uses the DROOLS framework. Please ensure you have this installed and set up before attempting to run.
 - Ensure that no data.xml file exists already in the project (should show at the bottom of the project contents) as this file is created when the application is ran to populate the database in order for the user to demonstrate the correct functionality of the application. 
 - Right-click LTSApplication.java in the ca.mcgill.ecse681.lts.application package and Run as > Java Application to open our Self-Adaptive Luggage Tracking System.
 

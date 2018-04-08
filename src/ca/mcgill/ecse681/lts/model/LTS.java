@@ -175,9 +175,9 @@ public class LTS
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Passenger addPassenger(String aPassportID, String aLastName, String aFirstName, boolean aExpiredPassport, float aLuggageWeightLimit, boolean aLoungeAccess, boolean aOverweightLuggagePrivilege)
+  public Passenger addPassenger(String aPassportID, String aLastName, String aFirstName, boolean aExpiredPassport, float aLuggageWeightLimit, boolean aLoungeAccess, boolean aOverweightLuggagePrivilege, int aAirCanadaFlightCount)
   {
-    return new Passenger(aPassportID, aLastName, aFirstName, aExpiredPassport, aLuggageWeightLimit, aLoungeAccess, aOverweightLuggagePrivilege, this);
+    return new Passenger(aPassportID, aLastName, aFirstName, aExpiredPassport, aLuggageWeightLimit, aLoungeAccess, aOverweightLuggagePrivilege, aAirCanadaFlightCount, this);
   }
 
   public boolean addPassenger(Passenger aPassenger)

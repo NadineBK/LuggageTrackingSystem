@@ -5,7 +5,7 @@ package ca.mcgill.ecse681.lts.model;
 import java.sql.Date;
 import java.util.*;
 
-// line 125 "../../../../../LTS.ump"
+// line 126 "../../../../../LTS.ump"
 public class CreditCard
 {
 
@@ -29,7 +29,7 @@ public class CreditCard
 
   public CreditCard(String aCcnumber, Date aExpirydate, String aCcname, int aSecurityCode, LTS aLTS)
   {
-    // line 132 "../../../../../LTS.ump"
+    // line 133 "../../../../../LTS.ump"
     if (aCcname == null || aCcname.length() == 0) {
     	    	throw new RuntimeException("The name on the credit card cannot be empty.");
     	    }
@@ -73,7 +73,7 @@ public class CreditCard
   public boolean setCcname(String aCcname)
   {
     boolean wasSet = false;
-    // line 137 "../../../../../LTS.ump"
+    // line 138 "../../../../../LTS.ump"
     if (aCcname == null || aCcname.length() == 0) {
     			return false;
     		}

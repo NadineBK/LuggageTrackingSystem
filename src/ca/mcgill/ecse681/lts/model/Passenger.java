@@ -21,6 +21,7 @@ public class Passenger
   private float luggageWeightLimit;
   private boolean loungeAccess;
   private boolean overweightLuggagePrivilege;
+  private int AirCanadaFlightCount;
 
   //Passenger Associations
   private List<Flight> flights;
@@ -32,14 +33,14 @@ public class Passenger
   // CONSTRUCTOR
   //------------------------
 
-  public Passenger(String aPassportID, String aLastName, String aFirstName, boolean aExpiredPassport, float aLuggageWeightLimit, boolean aLoungeAccess, boolean aOverweightLuggagePrivilege, LTS aLTS)
+  public Passenger(String aPassportID, String aLastName, String aFirstName, boolean aExpiredPassport, float aLuggageWeightLimit, boolean aLoungeAccess, boolean aOverweightLuggagePrivilege, int aAirCanadaFlightCount, LTS aLTS)
   {
-    // line 47 "../../../../../LTS.ump"
+    // line 48 "../../../../../LTS.ump"
     if (aFirstName == null || aFirstName.length() == 0) {
     	    	throw new RuntimeException("The name of a passenger cannot be empty.");
     	    }
     // END OF UMPLE BEFORE INJECTION
-    // line 58 "../../../../../LTS.ump"
+    // line 59 "../../../../../LTS.ump"
     if (aLastName == null || aLastName.length() == 0) {
     	    	throw new RuntimeException("The name of a passenger cannot be empty.");
     	    }
@@ -51,6 +52,7 @@ public class Passenger
     luggageWeightLimit = aLuggageWeightLimit;
     loungeAccess = aLoungeAccess;
     overweightLuggagePrivilege = aOverweightLuggagePrivilege;
+    AirCanadaFlightCount = aAirCanadaFlightCount;
     flights = new ArrayList<Flight>();
     transactions = new ArrayList<Transaction>();
     boolean didAddLTS = setLTS(aLTS);
@@ -80,7 +82,7 @@ public class Passenger
   public boolean setLastName(String aLastName)
   {
     boolean wasSet = false;
-    // line 63 "../../../../../LTS.ump"
+    // line 64 "../../../../../LTS.ump"
     if (aLastName == null || aLastName.length() == 0) {
     			return false;
     		}
@@ -93,7 +95,7 @@ public class Passenger
   public boolean setFirstName(String aFirstName)
   {
     boolean wasSet = false;
-    // line 52 "../../../../../LTS.ump"
+    // line 53 "../../../../../LTS.ump"
     if (aFirstName == null || aFirstName.length() == 0) {
     			return false;
     		}
@@ -138,6 +140,14 @@ public class Passenger
     return wasSet;
   }
 
+  public boolean setAirCanadaFlightCount(int aAirCanadaFlightCount)
+  {
+    boolean wasSet = false;
+    AirCanadaFlightCount = aAirCanadaFlightCount;
+    wasSet = true;
+    return wasSet;
+  }
+
   public String getPassportID()
   {
     return passportID;
@@ -171,6 +181,11 @@ public class Passenger
   public boolean getOverweightLuggagePrivilege()
   {
     return overweightLuggagePrivilege;
+  }
+
+  public int getAirCanadaFlightCount()
+  {
+    return AirCanadaFlightCount;
   }
 
   public boolean isExpiredPassport()
@@ -583,7 +598,8 @@ public class Passenger
             "expiredPassport" + ":" + getExpiredPassport()+ "," +
             "luggageWeightLimit" + ":" + getLuggageWeightLimit()+ "," +
             "loungeAccess" + ":" + getLoungeAccess()+ "," +
-            "overweightLuggagePrivilege" + ":" + getOverweightLuggagePrivilege()+ "]" + System.getProperties().getProperty("line.separator") +
+            "overweightLuggagePrivilege" + ":" + getOverweightLuggagePrivilege()+ "," +
+            "AirCanadaFlightCount" + ":" + getAirCanadaFlightCount()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "lTS = "+(getLTS()!=null?Integer.toHexString(System.identityHashCode(getLTS())):"null");
   }
 }

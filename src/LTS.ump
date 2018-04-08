@@ -40,6 +40,7 @@ class Passenger
 	[luggageWeightLimit > 0]
 	Boolean loungeAccess;
 	Boolean overweightLuggagePrivilege;
+	Integer AirCanadaFlightCount;
 	* -- * Flight;
 	1 -- * Transaction;
 	
